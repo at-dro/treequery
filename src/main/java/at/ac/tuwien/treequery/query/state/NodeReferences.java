@@ -1,6 +1,6 @@
 package at.ac.tuwien.treequery.query.state;
 
-import at.ac.tuwien.treequery.tree.TreeNode;
+import at.ac.tuwien.treequery.subject.SubjectNode;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,23 +11,23 @@ public class NodeReferences {
 
     static final NodeReferences EMPTY = new NodeReferences(Collections.emptyMap());
 
-    private final Map<String, TreeNode> data;
+    private final Map<String, SubjectNode> data;
 
-    private NodeReferences(Map<String, TreeNode> data) {
+    private NodeReferences(Map<String, SubjectNode> data) {
         this.data = data;
     }
 
-    public NodeReferences withReference(String reference, TreeNode node) {
+    public NodeReferences withReference(String reference, SubjectNode node) {
         if (reference == null || data.get(reference) == node) {
             return this;
         }
 
-        Map<String, TreeNode> newData = new HashMap<>(data);
+        Map<String, SubjectNode> newData = new HashMap<>(data);
         newData.put(reference, node);
         return new NodeReferences(newData);
     }
 
-    public Map<String, TreeNode> getData() {
+    public Map<String, SubjectNode> getData() {
         return data;
     }
 

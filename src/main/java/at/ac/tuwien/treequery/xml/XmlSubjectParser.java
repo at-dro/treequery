@@ -1,7 +1,7 @@
 package at.ac.tuwien.treequery.xml;
 
-import at.ac.tuwien.treequery.tree.BaseTreeNode;
-import at.ac.tuwien.treequery.tree.TreeNode;
+import at.ac.tuwien.treequery.subject.BaseSubjectNode;
+import at.ac.tuwien.treequery.subject.SubjectNode;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
@@ -14,9 +14,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class XmlTreeParser {
+public class XmlSubjectParser {
 
-    public List<TreeNode> parse(InputStream data) throws IOException {
+    public List<SubjectNode> parse(InputStream data) throws IOException {
         try {
             Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(data);
             XmlNode root = new XmlNode(document.getDocumentElement());
@@ -26,9 +26,9 @@ public class XmlTreeParser {
         }
     }
 
-    public TreeNode parse(XmlNode node) {
+    public SubjectNode parse(XmlNode node) {
         // Load children and properties
-        List<TreeNode> children = node.getChildren().map(this::parse).collect(Collectors.toList());
+        List<SubjectNode> children = node.getChildren().map(this::parse).collect(Collectors.toList());
         Map<String, String> properties = node.getAttributes();
 
         // Add the value of text elements to the properties
@@ -36,6 +36,6 @@ public class XmlTreeParser {
             node.getValue().ifPresent(v -> properties.put("value", v));
         }
 
-        return new BaseTreeNode(node.getName(), Collections.unmodifiableMap(properties), children);
+        return new BaseSubjectNode(node.getName(), Collections.unmodifiableMap(properties), children);
     }
 }

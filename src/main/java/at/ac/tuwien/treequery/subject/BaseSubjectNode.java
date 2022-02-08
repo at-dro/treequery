@@ -1,4 +1,4 @@
-package at.ac.tuwien.treequery.tree;
+package at.ac.tuwien.treequery.subject;
 
 import java.util.Collections;
 import java.util.List;
@@ -7,30 +7,30 @@ import java.util.Objects;
 import java.util.stream.Stream;
 
 /**
- * This is just a simple base implementation for tree nodes with default matching implementations for the generic cases.<br>
+ * This is just a simple base implementation for subject nodes with default matching implementations for the generic cases.<br>
  * Matching is split into multiple small methods, which allows parts to be overridden for more special subclasses.
  */
-public class BaseTreeNode implements TreeNode {
+public class BaseSubjectNode implements SubjectNode {
 
     private final String type;
     private final Map<String, Object> properties;
-    private final List<? extends TreeNode> children;
+    private final List<? extends SubjectNode> children;
 
     /**
-     * Construct a new tree node
+     * Construct a new subject node
      *
      * @param type The type of the node, which is separate from the rest of the properties to allow fast filtering
      * @param children An (optional) list of ordered children of this node
      * @param properties An (optional) map of properties of this node
      */
-    public BaseTreeNode(String type, Map<String, Object> properties, List<? extends TreeNode> children) {
+    public BaseSubjectNode(String type, Map<String, Object> properties, List<? extends SubjectNode> children) {
         this.type = type;
         this.properties = Objects.requireNonNullElse(properties, Collections.emptyMap());
         this.children = Objects.requireNonNullElse(children, Collections.emptyList());
     }
 
     @Override
-    public boolean matches(String type, Map<String, Object> properties, Map<String, TreeNode> references) {
+    public boolean matches(String type, Map<String, Object> properties, Map<String, SubjectNode> references) {
         return this.typeMatches(type) && this.propertiesMatch(properties, references);
     }
 
@@ -51,7 +51,7 @@ public class BaseTreeNode implements TreeNode {
      * @param references A collection of named node references that can be used for matching
      * @return True iff all given properties match the properties of this node
      */
-    protected boolean propertiesMatch(Map<String, Object> properties, Map<String, TreeNode> references) {
+    protected boolean propertiesMatch(Map<String, Object> properties, Map<String, SubjectNode> references) {
         return properties == null || properties.entrySet().stream().allMatch(e -> propertyMatches(e.getKey(), e.getValue(), references));
     }
 
@@ -63,7 +63,7 @@ public class BaseTreeNode implements TreeNode {
      * @param references A collection of named node references that can be used for matching
      * @return True iff this node fulfills the given property
      */
-    protected boolean propertyMatches(String key, Object value, Map<String, TreeNode> references) {
+    protected boolean propertyMatches(String key, Object value, Map<String, SubjectNode> references) {
         return propertyMatches(key, value);
     }
 
@@ -79,7 +79,7 @@ public class BaseTreeNode implements TreeNode {
     }
 
     @Override
-    public Stream<? extends TreeNode> getMatchingTargets() {
+    public Stream<? extends SubjectNode> getMatchingTargets() {
         return Stream.of(this);
     }
 
@@ -94,7 +94,7 @@ public class BaseTreeNode implements TreeNode {
     }
 
     @Override
-    public List<? extends TreeNode> getChildren() {
+    public List<? extends SubjectNode> getChildren() {
         return children;
     }
 }

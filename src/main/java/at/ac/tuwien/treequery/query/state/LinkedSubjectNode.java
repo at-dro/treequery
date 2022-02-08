@@ -1,6 +1,6 @@
 package at.ac.tuwien.treequery.query.state;
 
-import at.ac.tuwien.treequery.tree.TreeNode;
+import at.ac.tuwien.treequery.subject.SubjectNode;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,20 +10,20 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * This class wraps tree nodes in a linked structure to allow iterating along the tree
+ * This class wraps subject nodes in a linked structure to allow iterating along the tree
  */
-public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
+public class LinkedSubjectNode implements Comparable<LinkedSubjectNode> {
 
-    private final TreeNode node;
+    private final SubjectNode node;
     private final int[] path;
-    private final LinkedTreeNode parent;
-    private final List<LinkedTreeNode> children;
+    private final LinkedSubjectNode parent;
+    private final List<LinkedSubjectNode> children;
 
-    public LinkedTreeNode(TreeNode node) {
+    public LinkedSubjectNode(SubjectNode node) {
         this(node, null, 0);
     }
 
-    private LinkedTreeNode(TreeNode node, LinkedTreeNode parent, int index) {
+    private LinkedSubjectNode(SubjectNode node, LinkedSubjectNode parent, int index) {
         this.node = node;
         this.parent = parent;
 
@@ -36,11 +36,11 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
         }
 
         // Recursively create linked nodes for the children
-        List<TreeNode> children = node.getChildren().stream()
-                .flatMap(TreeNode::getMatchingTargets)
+        List<SubjectNode> children = node.getChildren().stream()
+                .flatMap(SubjectNode::getMatchingTargets)
                 .collect(Collectors.toList());
         this.children = IntStream.range(0, children.size())
-                .mapToObj(i -> new LinkedTreeNode(children.get(i), this, i))
+                .mapToObj(i -> new LinkedSubjectNode(children.get(i), this, i))
                 .collect(Collectors.toList());
     }
 
@@ -49,7 +49,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      *
      * @return The non-null node
      */
-    public TreeNode node() {
+    public SubjectNode node() {
         return node;
     }
 
@@ -59,7 +59,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      * @param ancestor The ancestor
      * @return A stream of ordered nodes within (but excluding) the ancestor
      */
-    public Stream<LinkedTreeNode> within(LinkedTreeNode ancestor) {
+    public Stream<LinkedSubjectNode> within(LinkedSubjectNode ancestor) {
         return Stream.iterate(this, Objects::nonNull, e -> e.getNext(ancestor));
     }
 
@@ -68,7 +68,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      *
      * @return A stream of ordered nodes at the same level of this node
      */
-    public Stream<LinkedTreeNode> neighbors() {
+    public Stream<LinkedSubjectNode> neighbors() {
         if (parent == null) {
             return Stream.of(this);
         }
@@ -80,7 +80,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      *
      * @return The first child, or null if no children exist
      */
-    public LinkedTreeNode getFirstChild() {
+    public LinkedSubjectNode getFirstChild() {
         return !children.isEmpty() ? children.get(0) : null;
     }
 
@@ -90,14 +90,14 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      * @param parent The parent of the result
      * @return A node that is a direct child of parent, or null if none could be found
      */
-    public LinkedTreeNode getDirectChildOf(LinkedTreeNode parent) {
+    public LinkedSubjectNode getDirectChildOf(LinkedSubjectNode parent) {
         if (this.parent == parent) {
             // This node already is a direct child
             return this;
         }
 
         // Look for the ancestor that is a direct child and go to its next neighbor
-        LinkedTreeNode ancestor = getAncestor(parent);
+        LinkedSubjectNode ancestor = getAncestor(parent);
         return ancestor != null ? ancestor.getDirectNeighbor() : null;
     }
 
@@ -107,11 +107,11 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      * @param ancestor The common ancestor of the subtree to check
      * @return A neighbor of this node, or null if none exists
      */
-    public LinkedTreeNode getNeighborWithin(LinkedTreeNode ancestor) {
+    public LinkedSubjectNode getNeighborWithin(LinkedSubjectNode ancestor) {
         // Move up the tree until we find a neighbor
-        LinkedTreeNode current = this;
+        LinkedSubjectNode current = this;
         while (current != null && current != ancestor) {
-            LinkedTreeNode neighbor = current.getDirectNeighbor();
+            LinkedSubjectNode neighbor = current.getDirectNeighbor();
             if (neighbor != null) {
                 // Found a neighbor: Return it
                 return neighbor;
@@ -129,7 +129,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      *
      * @return The next node on the same level, or null if none exists
      */
-    public LinkedTreeNode getDirectNeighbor() {
+    public LinkedSubjectNode getDirectNeighbor() {
         if (parent == null) {
             // Root node has no neighbors
             return null;
@@ -146,7 +146,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      * @param ancestor The root of the subtree
      * @return The next node or null if it does not exist
      */
-    private LinkedTreeNode getNext(LinkedTreeNode ancestor) {
+    private LinkedSubjectNode getNext(LinkedSubjectNode ancestor) {
         // Use the first child if it exists, or move up the tree to find a neighbor
         return children.isEmpty() ? getNeighborWithin(ancestor) : children.get(0);
     }
@@ -157,8 +157,8 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
      * @param parent The parent to look for
      * @return The direct child of the parent, or null if this node is not a descendent of the given parent
      */
-    private LinkedTreeNode getAncestor(LinkedTreeNode parent) {
-        LinkedTreeNode current = this;
+    private LinkedSubjectNode getAncestor(LinkedSubjectNode parent) {
+        LinkedSubjectNode current = this;
         while (current.parent != null) {
             if (current.parent == parent) {
                 return current;
@@ -169,7 +169,7 @@ public class LinkedTreeNode implements Comparable<LinkedTreeNode> {
     }
 
     @Override
-    public int compareTo(LinkedTreeNode that) {
+    public int compareTo(LinkedSubjectNode that) {
         return this != that ? Arrays.compare(this.path, that.path) : 0;
     }
 }

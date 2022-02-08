@@ -1,8 +1,8 @@
 package at.ac.tuwien.treequery.query.nodes;
 
+import at.ac.tuwien.treequery.query.state.LinkedSubjectNode;
 import at.ac.tuwien.treequery.query.state.MatchingState;
 import at.ac.tuwien.treequery.query.state.NodeReferences;
-import at.ac.tuwien.treequery.query.state.LinkedTreeNode;
 
 import java.util.Map;
 import java.util.stream.Stream;
@@ -27,17 +27,17 @@ public class SingleQueryNode implements QueryNode {
 
     @Override
     public Stream<MatchingState> matches(MatchingState start) {
-        Stream<LinkedTreeNode> candidates = direct ? start.streamDirectChildren() : start.streamWithin();
+        Stream<LinkedSubjectNode> candidates = direct ? start.streamDirectChildren() : start.streamWithin();
         return candidates
                 .filter(e -> matches(start.getReferences(), e))
                 .flatMap(e -> handleCandidate(start, e));
     }
 
-    private boolean matches(NodeReferences references, LinkedTreeNode element) {
+    private boolean matches(NodeReferences references, LinkedSubjectNode element) {
         return element.node().matches(name, properties, references.getData());
     }
 
-    private Stream<MatchingState> handleCandidate(MatchingState state, LinkedTreeNode element) {
+    private Stream<MatchingState> handleCandidate(MatchingState state, LinkedSubjectNode element) {
         // Try to find children using the current element as parent
         MatchingState childState = state.buildChildState(reference, element);
         Stream<NodeReferences> result = children.matches(childState).map(MatchingState::getReferences);

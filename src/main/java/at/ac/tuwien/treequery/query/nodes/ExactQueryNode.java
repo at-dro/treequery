@@ -1,7 +1,7 @@
 package at.ac.tuwien.treequery.query.nodes;
 
 import at.ac.tuwien.treequery.query.state.MatchingState;
-import at.ac.tuwien.treequery.query.state.LinkedTreeNode;
+import at.ac.tuwien.treequery.query.state.LinkedSubjectNode;
 
 import java.util.List;
 import java.util.stream.Stream;
@@ -39,7 +39,7 @@ public class ExactQueryNode extends ContainerQueryNode {
         Stream<MatchingState> result = query.matches(candidate).map(MatchingState::withDirectChild);
         if (matchOne) {
             // If matching exactly one element the resulting element must be the direct neighbor of the candidate
-            LinkedTreeNode expected = candidate.getElement().getDirectNeighbor();
+            LinkedSubjectNode expected = candidate.getElement().getDirectNeighbor();
             result = result.filter(s -> s.getElement() == expected);
         }
 

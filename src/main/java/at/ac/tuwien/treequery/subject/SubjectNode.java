@@ -1,10 +1,10 @@
-package at.ac.tuwien.treequery.tree;
+package at.ac.tuwien.treequery.subject;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
-public interface TreeNode {
+public interface SubjectNode {
 
     /**
      * Check if this node matches the given type and properties
@@ -14,7 +14,7 @@ public interface TreeNode {
      * @param references A collection of named node references that can be used for matching
      * @return True iff the type and properties are either null or match the given node
      */
-    boolean matches(String type, Map<String, Object> properties, Map<String, TreeNode> references);
+    boolean matches(String type, Map<String, Object> properties, Map<String, SubjectNode> references);
 
     /**
      * Get the targets against which the matching is performed.<br>
@@ -22,7 +22,7 @@ public interface TreeNode {
      *
      * @return A stream of nodes to match against
      */
-    Stream<? extends TreeNode> getMatchingTargets();
+    Stream<? extends SubjectNode> getMatchingTargets();
 
     /**
      * Get the type of this node
@@ -43,5 +43,5 @@ public interface TreeNode {
      *
      * @return A (possibly empty) list of children of this node
      */
-    List<? extends TreeNode> getChildren();
+    List<? extends SubjectNode> getChildren();
 }

@@ -1,6 +1,6 @@
 package at.ac.tuwien.treequery.query.state;
 
-import at.ac.tuwien.treequery.tree.TreeNode;
+import at.ac.tuwien.treequery.subject.SubjectNode;
 
 import java.util.Objects;
 import java.util.stream.Stream;
@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 public class MatchingState {
 
     private final NodeReferences references;
-    private final LinkedTreeNode root;
-    private final LinkedTreeNode element;
+    private final LinkedSubjectNode root;
+    private final LinkedSubjectNode element;
 
     /**
      * Build a stream of (empty) matching states for a root node
@@ -20,13 +20,13 @@ public class MatchingState {
      * @param node The root node
      * @return A stream of empty matching states
      */
-    public static Stream<MatchingState> fromTreeNode(TreeNode node) {
+    public static Stream<MatchingState> fromSubjectNode(SubjectNode node) {
         return node.getMatchingTargets()
-                .map(LinkedTreeNode::new)
+                .map(LinkedSubjectNode::new)
                 .map(target -> new MatchingState(NodeReferences.EMPTY, target, target.getFirstChild()));
     }
 
-    private MatchingState(NodeReferences references, LinkedTreeNode root, LinkedTreeNode element) {
+    private MatchingState(NodeReferences references, LinkedSubjectNode root, LinkedSubjectNode element) {
         this.references = references;
         this.root = root;
         this.element = element;
@@ -46,7 +46,7 @@ public class MatchingState {
      *
      * @return A nullable element
      */
-    public LinkedTreeNode getElement() {
+    public LinkedSubjectNode getElement() {
         return element;
     }
 
@@ -55,7 +55,7 @@ public class MatchingState {
      *
      * @return A (possibly empty) stream of candidate elements
      */
-    public Stream<LinkedTreeNode> streamWithin() {
+    public Stream<LinkedSubjectNode> streamWithin() {
         return element != null ? element.within(root) : Stream.empty();
     }
 
@@ -64,8 +64,8 @@ public class MatchingState {
      *
      * @return A (possibly empty) stream of candidate elements
      */
-    public Stream<LinkedTreeNode> streamDirectChildren() {
-        LinkedTreeNode start = element != null ? element.getDirectChildOf(root) : null;
+    public Stream<LinkedSubjectNode> streamDirectChildren() {
+        LinkedSubjectNode start = element != null ? element.getDirectChildOf(root) : null;
         return start != null ? start.neighbors() : Stream.empty();
     }
 
@@ -75,7 +75,7 @@ public class MatchingState {
      * @param element A non-null element
      * @return A new state instance
      */
-    public MatchingState neighborOf(LinkedTreeNode element) {
+    public MatchingState neighborOf(LinkedSubjectNode element) {
         return withElement(element.getNeighborWithin(root));
     }
 
@@ -128,7 +128,7 @@ public class MatchingState {
      * @param element The element stored as reference and used as new root
      * @return A new state instance
      */
-    public MatchingState buildChildState(String reference, LinkedTreeNode element) {
+    public MatchingState buildChildState(String reference, LinkedSubjectNode element) {
         return new MatchingState(references.withReference(reference, element.node()), element, element.getFirstChild());
     }
 
@@ -138,7 +138,7 @@ public class MatchingState {
      * @param element The new element
      * @return A new state instance if the element changed
      */
-    private MatchingState withElement(LinkedTreeNode element) {
+    private MatchingState withElement(LinkedSubjectNode element) {
         return this.element != element ? new MatchingState(references, root, element) : this;
     }
 
