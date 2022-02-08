@@ -23,7 +23,7 @@ class CDATAOutputStreamWrapper extends OutputStream {
         return Runtime.version().feature() < 14 ? new CDATAOutputStreamWrapper(out) : out;
     }
 
-    private CDATAOutputStreamWrapper(OutputStream out) {
+    CDATAOutputStreamWrapper(OutputStream out) {
         this.out = out;
     }
 

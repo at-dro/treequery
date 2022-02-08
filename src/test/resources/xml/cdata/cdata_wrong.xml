@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<node5 prop25="val6877" prop83="val2001">
+    <node8 prop62="val7198" prop92="val6562">
+        <node4/>
+        <node2 prop29="val5931" prop37="val8145"/>
+        <node9>
+            <![CDATA[val3054]]>
+        </node9>
+        <node8 prop61="val3848" prop97="val6111">
+            <node8 prop07="val3891" prop23="val5129"/>
+            <node2 prop61="val7035"/>
+            <node3/>
+            <node9 prop08="val1430" prop59="val6455">
+                <![CDATA[val1891]]>
+            </node9>
+        </node8>
+    </node8>
+    <node1 prop30="val9715">
+        <![CDATA[val3877]]>
+    </node1>
+    <node8 prop16="val7150" prop69="val1245">
+        <node6/>
+        <node0 prop26="val6178"/>
+    </node8>
+    <node1 prop12="val7209" prop23="val8826">
+        <node6 prop40="val3103">
+            <![CDATA[val4879]]>
+        </node6>
+    </node1>
+</node5>
