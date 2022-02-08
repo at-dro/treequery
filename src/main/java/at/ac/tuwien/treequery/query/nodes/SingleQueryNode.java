@@ -26,7 +26,7 @@ public class SingleQueryNode implements QueryNode {
     }
 
     @Override
-    public Stream<MatchingState> matches(MatchingState start) {
+    public Stream<MatchingState> findMatches(MatchingState start) {
         Stream<LinkedSubjectNode> candidates = direct ? start.streamDirectChildren() : start.streamWithin();
         return candidates
                 .filter(e -> matches(start.getReferences(), e))
@@ -40,7 +40,7 @@ public class SingleQueryNode implements QueryNode {
     private Stream<MatchingState> handleCandidate(MatchingState state, LinkedSubjectNode element) {
         // Try to find children using the current element as parent
         MatchingState childState = state.buildChildState(reference, element);
-        Stream<NodeReferences> result = children.matches(childState).map(MatchingState::getReferences);
+        Stream<NodeReferences> result = children.findMatches(childState).map(MatchingState::getReferences);
 
         // If there are no named refs in this query subtree we do not actually need to calculate every result, they will all be the same
         result = hasReferences ? result.distinct() : result.limit(1);

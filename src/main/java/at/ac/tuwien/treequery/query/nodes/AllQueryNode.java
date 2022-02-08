@@ -15,7 +15,7 @@ public class AllQueryNode extends ContainerQueryNode {
     }
 
     @Override
-    public Stream<MatchingState> matches(MatchingState start) {
+    public Stream<MatchingState> findMatches(MatchingState start) {
         Stream<MatchingState> states = Stream.of(start);
         for (QueryNode query : children) {
             states = states.flatMap(candidate -> handleCandidate(start, candidate, query)).distinct();
@@ -26,7 +26,7 @@ public class AllQueryNode extends ContainerQueryNode {
     private Stream<MatchingState> handleCandidate(MatchingState start, MatchingState candidate, QueryNode query) {
         // If we are not looking for an ordered solution start at the original start node, but with the candidates references set
         MatchingState state = ordered ? candidate : candidate.withStart(start);
-        Stream<MatchingState> result = query.matches(state);
+        Stream<MatchingState> result = query.findMatches(state);
 
         if (!ordered) {
             // If we are not looking for an ordered solution just put the later node in the result

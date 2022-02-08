@@ -7,13 +7,15 @@ import java.util.stream.Stream;
 
 public interface QueryNode {
 
-    default boolean matches(SubjectNode node) {
-        return MatchingState.fromSubjectNode(node)
-                .flatMap(this::matches)
-                .findAny().isPresent();
+    default boolean hasMatches(SubjectNode node) {
+        return findMatches(node).findAny().isPresent();
     }
 
-    Stream<MatchingState> matches(MatchingState start);
+    default Stream<MatchingState> findMatches(SubjectNode node) {
+        return MatchingState.fromSubjectNode(node).flatMap(this::findMatches);
+    }
+
+    Stream<MatchingState> findMatches(MatchingState start);
 
     boolean hasReferences();
 }

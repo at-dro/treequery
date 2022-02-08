@@ -13,7 +13,7 @@ public class ExactQueryNode extends ContainerQueryNode {
     }
 
     @Override
-    public Stream<MatchingState> matches(MatchingState start) {
+    public Stream<MatchingState> findMatches(MatchingState start) {
         Stream<MatchingState> states = Stream.of(start);
         boolean exactEnd = true;
         for (QueryNode query : children) {
@@ -36,7 +36,7 @@ public class ExactQueryNode extends ContainerQueryNode {
             return Stream.empty();
         }
 
-        Stream<MatchingState> result = query.matches(candidate).map(MatchingState::withDirectChild);
+        Stream<MatchingState> result = query.findMatches(candidate).map(MatchingState::withDirectChild);
         if (matchOne) {
             // If matching exactly one element the resulting element must be the direct neighbor of the candidate
             LinkedSubjectNode expected = candidate.getElement().getDirectNeighbor();

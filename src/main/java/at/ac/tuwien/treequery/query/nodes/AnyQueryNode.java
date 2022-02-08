@@ -18,7 +18,7 @@ public class AnyQueryNode extends ContainerQueryNode {
     }
 
     @Override
-    public Stream<MatchingState> matches(MatchingState start) {
+    public Stream<MatchingState> findMatches(MatchingState start) {
         if (children.isEmpty()) {
             // Not looking for anything: This trivially matches
             return Stream.of(start);
@@ -32,7 +32,7 @@ public class AnyQueryNode extends ContainerQueryNode {
                     // Make sure only distinct states are evaluated
                     .distinct()
                     // Evaluate candidate states
-                    .flatMap(query::matches)
+                    .flatMap(query::findMatches)
                     .collect(Collectors.toSet());
 
             // Add to set of existing solutions
