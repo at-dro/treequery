@@ -25,7 +25,7 @@ public class QueryXmlConverter extends XmlConverter<QueryNode> {
      */
     public QueryXmlConverter(String... containerTags) {
         this.containerTags = new HashSet<>();
-        this.containerTags.addAll(Arrays.asList("query", "group", "container"));
+        this.containerTags.add("container");
         this.containerTags.addAll(Arrays.asList(containerTags));
     }
 
