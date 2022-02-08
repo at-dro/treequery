@@ -1,0 +1,4 @@
+<container mode="any">
+    <lit><![CDATA[foo]]></lit>
+    <lit><![CDATA[bar]]></lit>
+</container>

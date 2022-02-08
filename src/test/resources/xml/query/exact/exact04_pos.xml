@@ -1,0 +1,5 @@
+<!-- POSITIVE: two leaf nodes -->
+<container>
+    <c mode="exact"/>
+    <g mode="exact"/>
+</container>

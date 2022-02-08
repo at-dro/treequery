@@ -1,0 +1,10 @@
+<!-- POSITIVE: two non-existent subtrees -->
+<container mode="optional">
+    <y>
+        <c/>
+    </y>
+    <z>
+        <e/>
+        <f/>
+    </z>
+</container>

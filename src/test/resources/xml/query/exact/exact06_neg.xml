@@ -1,0 +1,9 @@
+<!-- NEGATIVE: partial inner structure -->
+<container>
+    <d mode="exact">
+        <e/>
+    </d>
+    <d>
+        <f/>
+    </d>
+</container>

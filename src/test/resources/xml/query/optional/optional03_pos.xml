@@ -1,0 +1,4 @@
+<!-- POSITIVE: single leaf node -->
+<container mode="optional">
+    <e/>
+</container>

@@ -1,0 +1,17 @@
+<!-- NEGATIVE: full tree with shuffled leaves -->
+<container>
+    <a>
+        <b>
+            <c/>
+        </b>
+        <d>
+            <f/>
+            <e/>
+        </d>
+        <g/>
+        <d>
+            <f/>
+        </d>
+    </a>
+    <h/>
+</container>

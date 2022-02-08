@@ -1,0 +1,6 @@
+<container>
+    <a direct="true" mode="exact">
+        <c direct="true"/>
+        <container/>
+    </a>
+</container>

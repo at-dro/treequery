@@ -1,0 +1,17 @@
+<!-- POSITIVE: Full subject tree with all properties -->
+<container>
+    <a p1="v1a" p2="v2">
+        <a p1="v1b" p3="v3">
+            <a p4="v4"/>
+        </a>
+        <b p2="v2" p3="v3" p5="v5a">
+            <b p6="v6a"/>
+            <c p6="v6b"/>
+        </b>
+        <b p5="v5b"/>
+        <c p7="v7" p8="v8">
+            <a p4="v4" p5="v5a"/>
+        </c>
+    </a>
+    <c p9="v9"/>
+</container>

@@ -1,0 +1,4 @@
+<!-- POSITIVE: Inner node with all properties -->
+<container>
+    <c p7="v7" p8="v8"/>
+</container>

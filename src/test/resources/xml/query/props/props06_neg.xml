@@ -1,0 +1,4 @@
+<!-- NEGATIVE: Single node with incorrect property -->
+<container>
+    <a p1="v1c"/>
+</container>

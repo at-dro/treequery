@@ -1,0 +1,4 @@
+<!-- NEGATIVE: Single node with non-existent property -->
+<container>
+    <b p1="v6a"/>
+</container>

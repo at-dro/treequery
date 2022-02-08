@@ -1,0 +1,9 @@
+<!-- POSITIVE: partial inner structure -->
+<container>
+    <d>
+        <e direct="true"/>
+    </d>
+    <d>
+        <f direct="true"/>
+    </d>
+</container>

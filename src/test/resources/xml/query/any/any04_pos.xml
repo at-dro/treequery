@@ -1,0 +1,5 @@
+<!-- POSITIVE: two leaf nodes -->
+<container mode="any">
+    <c/>
+    <g/>
+</container>

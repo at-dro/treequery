@@ -1,0 +1,11 @@
+<!-- POSITIVE: partial inner structure with shuffled nodes -->
+<container mode="optional">
+    <g/>
+    <d>
+        <e/>
+        <f/>
+    </d>
+    <d>
+        <f/>
+    </d>
+</container>

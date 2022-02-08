@@ -1,0 +1,10 @@
+<!-- NEGATIVE: two non-existent subtrees -->
+<container mode="unordered">
+    <y>
+        <c/>
+    </y>
+    <z>
+        <e/>
+        <f/>
+    </z>
+</container>

@@ -1,0 +1,5 @@
+<!-- NEGATIVE: two leaf nodes -->
+<container>
+    <c direct="true"/>
+    <g/>
+</container>

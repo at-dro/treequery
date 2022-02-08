@@ -1,0 +1,14 @@
+<!-- POSITIVE: partial root-to-leaves -->
+<container>
+    <a mode="unordered">
+        <b>
+            <c/>
+        </b>
+        <d>
+            <f/>
+        </d>
+        <d>
+            <f/>
+        </d>
+    </a>
+</container>

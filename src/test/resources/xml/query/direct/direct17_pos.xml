@@ -1,0 +1,6 @@
+<!-- POSITIVE: skip a level in the a-d-e subtree -->
+<container>
+    <a direct="true">
+        <e/>
+    </a>
+</container>

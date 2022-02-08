@@ -1,0 +1,4 @@
+<!-- NEGATIVE: Single node with non-existent combination of properties -->
+<container>
+    <c p7="v7" p9="v9"/>
+</container>

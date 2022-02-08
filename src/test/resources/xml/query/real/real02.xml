@@ -1,0 +1,4 @@
+<container mode="any">
+    <mc name="indexOf"/>
+    <mc name="lastIndexOf"/>
+</container>

@@ -1,0 +1,4 @@
+<!-- NEGATIVE: single inner node -->
+<container>
+    <b direct="true"/>
+</container>

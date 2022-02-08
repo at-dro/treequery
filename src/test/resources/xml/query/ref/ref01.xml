@@ -1,0 +1,4 @@
+<!-- Query matches two different nodes -->
+<container>
+    <a p4="v4" ref="refA"/>
+</container>

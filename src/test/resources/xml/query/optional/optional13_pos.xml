@@ -1,0 +1,5 @@
+<!-- POSITIVE: one existent, one non-existent leaf -->
+<container mode="optional">
+    <g/>
+    <z/>
+</container>

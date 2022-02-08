@@ -1,0 +1,14 @@
+<!-- POSITIVE: partial root-to-leaves -->
+<container>
+    <a direct="true">
+        <b direct="true">
+            <c direct="true"/>
+        </b>
+        <d direct="true">
+            <f direct="true"/>
+        </d>
+        <d direct="true">
+            <f direct="true"/>
+        </d>
+    </a>
+</container>

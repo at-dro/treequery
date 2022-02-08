@@ -1,0 +1,17 @@
+<!-- POSITIVE: full subject tree -->
+<container>
+    <a direct="true">
+        <b direct="true">
+            <c direct="true"/>
+        </b>
+        <d direct="true">
+            <e direct="true"/>
+            <f direct="true"/>
+        </d>
+        <g direct="true"/>
+        <d direct="true">
+            <f direct="true"/>
+        </d>
+    </a>
+    <h direct="true"/>
+</container>

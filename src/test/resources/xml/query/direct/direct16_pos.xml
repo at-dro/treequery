@@ -1,0 +1,15 @@
+<!-- POSITIVE: skip the first level of the "a" subtree, but set the "direct" flag everywhere else -->
+<container>
+    <b>
+        <c direct="true"/>
+    </b>
+    <d>
+        <e direct="true"/>
+        <f direct="true"/>
+    </d>
+    <g/>
+    <d>
+        <f direct="true"/>
+    </d>
+    <h direct="true"/>
+</container>

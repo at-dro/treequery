@@ -1,0 +1,14 @@
+<!-- POSITIVE: partial root-to-leaves -->
+<container>
+    <a>
+        <b mode="exact">
+            <c mode="exact"/>
+        </b>
+        <d>
+            <f mode="exact"/>
+        </d>
+        <d mode="exact">
+            <f mode="exact"/>
+        </d>
+    </a>
+</container>

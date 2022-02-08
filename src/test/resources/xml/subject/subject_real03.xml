@@ -1,0 +1,387 @@
+<ast>
+    <var name="text" scope="local" type="java.lang.String">
+        <assign>
+            <write name="text" scope="local" type="java.lang.String"/>
+            <lit type="String"><![CDATA[foo]]></lit>
+        </assign>
+    </var>
+    <var name="text2" scope="local" type="java.lang.String">
+        <assign>
+            <write name="text2" scope="local" type="java.lang.String"/>
+            <lit type="String"><![CDATA[bar]]></lit>
+        </assign>
+    </var>
+    <var name="subString" scope="local" type="java.lang.String">
+        <assign>
+            <write name="subString" scope="local" type="java.lang.String"/>
+            <lit type="String"/>
+        </assign>
+    </var>
+    <var name="counter" scope="local" type="int">
+        <assign>
+            <write name="counter" scope="local" type="int"/>
+            <lit type="int"><![CDATA[0]]></lit>
+        </assign>
+    </var>
+    <var name="value" scope="local" type="int">
+        <assign>
+            <write name="value" scope="local" type="int"/>
+            <lit type="int"><![CDATA[0]]></lit>
+        </assign>
+    </var>
+    <while>
+        <expr>
+            <op type="LT">
+                <read name="counter" scope="local" type="int"/>
+                <lit type="int"><![CDATA[3]]></lit>
+            </op>
+        </expr>
+        <body>
+            <for>
+                <init>
+                    <var name="i" scope="local" type="int">
+                        <assign>
+                            <write name="i" scope="local" type="int"/>
+                            <read name="value" scope="local" type="int"/>
+                        </assign>
+                    </var>
+                </init>
+                <expr>
+                    <op type="LT">
+                        <read name="i" scope="local" type="int"/>
+                        <mc name="length" target="java.lang.String"/>
+                    </op>
+                </expr>
+                <update>
+                    <unary type="POSTINC">
+                        <write name="i" scope="local" type="int"/>
+                    </unary>
+                </update>
+                <body>
+                    <assign>
+                        <write name="subString" scope="local" type="java.lang.String"/>
+                        <op type="PLUS">
+                            <read name="subString" scope="local" type="java.lang.String"/>
+                            <mc name="charAt" target="java.lang.String">
+                                <read name="i" scope="local" type="int"/>
+                            </mc>
+                        </op>
+                    </assign>
+                    <unary type="POSTINC">
+                        <write name="value" scope="local" type="int"/>
+                    </unary>
+                    <if>
+                        <expr>
+                            <op type="EQ">
+                                <mc name="charAt" target="java.lang.String">
+                                    <read name="i" scope="local" type="int"/>
+                                </mc>
+                                <lit type="char"><![CDATA[n]]></lit>
+                            </op>
+                        </expr>
+                        <then>
+                            <unary type="POSTINC">
+                                <write name="counter" scope="local" type="int"/>
+                            </unary>
+                            <break/>
+                        </then>
+                        <else/>
+                    </if>
+                </body>
+            </for>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream">
+        <read name="subString" scope="local" type="java.lang.String"/>
+    </mc>
+    <assign>
+        <write name="counter" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <while>
+        <expr>
+            <op type="NE">
+                <read name="counter" scope="local" type="int"/>
+                <lit type="int"><![CDATA[1]]></lit>
+            </op>
+        </expr>
+        <body>
+            <if>
+                <expr>
+                    <op type="GE">
+                        <mc name="indexOf" target="java.lang.String">
+                            <lit type="char"><![CDATA[l]]></lit>
+                        </mc>
+                        <lit type="int"><![CDATA[0]]></lit>
+                    </op>
+                </expr>
+                <then>
+                    <for>
+                        <init>
+                            <var name="i" scope="local" type="int">
+                                <assign>
+                                    <write name="i" scope="local" type="int"/>
+                                    <lit type="int"><![CDATA[0]]></lit>
+                                </assign>
+                            </var>
+                        </init>
+                        <expr>
+                            <op type="LT">
+                                <read name="i" scope="local" type="int"/>
+                                <mc name="length" target="java.lang.String"/>
+                            </op>
+                        </expr>
+                        <update>
+                            <unary type="POSTINC">
+                                <write name="i" scope="local" type="int"/>
+                            </unary>
+                        </update>
+                        <body>
+                            <if>
+                                <expr>
+                                    <op type="EQ">
+                                        <mc name="charAt" target="java.lang.String">
+                                            <read name="i" scope="local" type="int"/>
+                                        </mc>
+                                        <lit type="char"><![CDATA[l]]></lit>
+                                    </op>
+                                </expr>
+                                <then>
+                                    <mc name="println" target="java.io.PrintStream">
+                                        <read name="i" scope="local" type="int"/>
+                                    </mc>
+                                    <unary type="POSTINC">
+                                        <write name="counter" scope="local" type="int"/>
+                                    </unary>
+                                </then>
+                                <else/>
+                            </if>
+                        </body>
+                    </for>
+                </then>
+                <else>
+                    <mc name="println" target="java.io.PrintStream">
+                        <lit type="String"><![CDATA[-1]]></lit>
+                    </mc>
+                    <unary type="POSTINC">
+                        <write name="counter" scope="local" type="int"/>
+                    </unary>
+                </else>
+            </if>
+        </body>
+    </while>
+    <assign>
+        <write name="value" scope="local" type="int"/>
+        <lit type="int"><![CDATA[27]]></lit>
+    </assign>
+    <while>
+        <expr>
+            <op type="LE">
+                <read name="value" scope="local" type="int"/>
+                <lit type="int"><![CDATA[280]]></lit>
+            </op>
+        </expr>
+        <body>
+            <if>
+                <expr>
+                    <op type="AND">
+                        <op type="EQ">
+                            <op type="MOD">
+                                <read name="value" scope="local" type="int"/>
+                                <lit type="int"><![CDATA[21]]></lit>
+                            </op>
+                            <lit type="int"><![CDATA[0]]></lit>
+                        </op>
+                        <op type="EQ">
+                            <op type="MOD">
+                                <read name="value" scope="local" type="int"/>
+                                <lit type="int"><![CDATA[2]]></lit>
+                            </op>
+                            <lit type="int"><![CDATA[0]]></lit>
+                        </op>
+                    </op>
+                </expr>
+                <then>
+                    <mc name="print" target="java.io.PrintStream">
+                        <op type="PLUS">
+                            <read name="value" scope="local" type="int"/>
+                            <lit type="String"><![CDATA[ ]]></lit>
+                        </op>
+                    </mc>
+                </then>
+                <else/>
+            </if>
+            <unary type="POSTINC">
+                <write name="value" scope="local" type="int"/>
+            </unary>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream"/>
+    <assign>
+        <write name="counter" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <assign>
+        <write name="subString" scope="local" type="java.lang.String"/>
+        <lit type="String"/>
+    </assign>
+    <while>
+        <expr>
+            <op type="LT">
+                <read name="counter" scope="local" type="int"/>
+                <mc name="length" target="java.lang.String"/>
+            </op>
+        </expr>
+        <body>
+            <for>
+                <init>
+                    <var name="i" scope="local" type="int">
+                        <assign>
+                            <write name="i" scope="local" type="int"/>
+                            <op type="MINUS">
+                                <mc name="length" target="java.lang.String"/>
+                                <lit type="int"><![CDATA[2]]></lit>
+                            </op>
+                        </assign>
+                    </var>
+                </init>
+                <expr>
+                    <op type="GE">
+                        <read name="i" scope="local" type="int"/>
+                        <lit type="int"><![CDATA[0]]></lit>
+                    </op>
+                </expr>
+                <update>
+                    <assign>
+                        <write name="i" scope="local" type="int"/>
+                        <op type="MINUS">
+                            <read name="i" scope="local" type="int"/>
+                            <lit type="int"><![CDATA[2]]></lit>
+                        </op>
+                    </assign>
+                </update>
+                <body>
+                    <if>
+                        <expr>
+                            <op type="AND">
+                                <op type="NE">
+                                    <mc name="charAt" target="java.lang.String">
+                                        <read name="i" scope="local" type="int"/>
+                                    </mc>
+                                    <lit type="char"><![CDATA[s]]></lit>
+                                </op>
+                                <op type="NE">
+                                    <mc name="charAt" target="java.lang.String">
+                                        <read name="i" scope="local" type="int"/>
+                                    </mc>
+                                    <lit type="char"><![CDATA[S]]></lit>
+                                </op>
+                            </op>
+                        </expr>
+                        <then>
+                            <assign>
+                                <write name="subString" scope="local" type="java.lang.String"/>
+                                <op type="PLUS">
+                                    <read name="subString" scope="local" type="java.lang.String"/>
+                                    <mc name="charAt" target="java.lang.String">
+                                        <read name="i" scope="local" type="int"/>
+                                    </mc>
+                                </op>
+                            </assign>
+                        </then>
+                        <else/>
+                    </if>
+                    <assign>
+                        <write name="counter" scope="local" type="int"/>
+                        <op type="PLUS">
+                            <read name="counter" scope="local" type="int"/>
+                            <lit type="int"><![CDATA[2]]></lit>
+                        </op>
+                    </assign>
+                </body>
+            </for>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream">
+        <read name="subString" scope="local" type="java.lang.String"/>
+    </mc>
+    <assign>
+        <write name="value" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <assign>
+        <write name="counter" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <while>
+        <expr>
+            <op type="LT">
+                <read name="counter" scope="local" type="int"/>
+                <mc name="length" target="java.lang.String"/>
+            </op>
+        </expr>
+        <body>
+            <for>
+                <init>
+                    <var name="i" scope="local" type="int">
+                        <assign>
+                            <write name="i" scope="local" type="int"/>
+                            <lit type="int"><![CDATA[0]]></lit>
+                        </assign>
+                    </var>
+                </init>
+                <expr>
+                    <op type="LT">
+                        <read name="i" scope="local" type="int"/>
+                        <mc name="length" target="java.lang.String"/>
+                    </op>
+                </expr>
+                <update>
+                    <unary type="POSTINC">
+                        <write name="i" scope="local" type="int"/>
+                    </unary>
+                </update>
+                <body>
+                    <if>
+                        <expr>
+                            <op type="OR">
+                                <op type="OR">
+                                    <op type="EQ">
+                                        <mc name="charAt" target="java.lang.String">
+                                            <read name="i" scope="local" type="int"/>
+                                        </mc>
+                                        <lit type="char"><![CDATA[ ]]></lit>
+                                    </op>
+                                    <op type="EQ">
+                                        <mc name="charAt" target="java.lang.String">
+                                            <read name="i" scope="local" type="int"/>
+                                        </mc>
+                                        <lit type="char"><![CDATA[.]]></lit>
+                                    </op>
+                                </op>
+                                <op type="EQ">
+                                    <mc name="charAt" target="java.lang.String">
+                                        <read name="i" scope="local" type="int"/>
+                                    </mc>
+                                    <lit type="char"><![CDATA[,]]></lit>
+                                </op>
+                            </op>
+                        </expr>
+                        <then>
+                            <unary type="POSTINC">
+                                <write name="value" scope="local" type="int"/>
+                            </unary>
+                        </then>
+                        <else/>
+                    </if>
+                    <unary type="POSTINC">
+                        <write name="counter" scope="local" type="int"/>
+                    </unary>
+                </body>
+            </for>
+        </body>
+    </while>
+    <mc name="print" target="java.io.PrintStream">
+        <read name="value" scope="local" type="int"/>
+    </mc>
+</ast>

@@ -1,0 +1,10 @@
+<!-- Use optional subtree to obtain a total of 7 different matches -->
+<container>
+    <!-- This may match any of the three "b" nodes -->
+    <b ref="ref1" mode="optional">
+        <!-- This may match the nested "b" node or not at all -->
+        <b ref="ref2"/>
+    </b>
+    <!-- This may match the last two "c" nodes, and the one nested in "b" if ref1 is the nested "b" leaf -->
+    <c ref="ref3"/>
+</container>

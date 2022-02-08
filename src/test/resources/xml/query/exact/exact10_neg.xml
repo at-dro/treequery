@@ -1,0 +1,8 @@
+<!-- NEGATIVE: duplicated node -->
+<container mode="exact">
+    <d>
+        <e/>
+        <f/>
+    </d>
+    <e/>
+</container>

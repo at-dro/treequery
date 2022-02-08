@@ -1,0 +1,279 @@
+<ast>
+    <var name="text" scope="local" type="java.lang.String">
+        <assign>
+            <write name="text" scope="local" type="java.lang.String"/>
+            <lit type="String"><![CDATA[foo]]></lit>
+        </assign>
+    </var>
+    <var name="text2" scope="local" type="java.lang.String">
+        <assign>
+            <write name="text2" scope="local" type="java.lang.String"/>
+            <lit type="String"><![CDATA[bar]]></lit>
+        </assign>
+    </var>
+    <var name="test" scope="local" type="java.lang.String">
+        <assign>
+            <write name="test" scope="local" type="java.lang.String"/>
+            <read name="text" scope="local" type="java.lang.String"/>
+        </assign>
+    </var>
+    <var name="i" scope="local" type="int">
+        <assign>
+            <write name="i" scope="local" type="int"/>
+            <lit type="int"><![CDATA[0]]></lit>
+        </assign>
+    </var>
+    <var name="count" scope="local" type="int">
+        <assign>
+            <write name="count" scope="local" type="int"/>
+            <lit type="int"><![CDATA[0]]></lit>
+        </assign>
+    </var>
+    <while>
+        <expr>
+            <op type="LT">
+                <read name="i" scope="local" type="int"/>
+                <mc name="length" target="java.lang.String"/>
+            </op>
+        </expr>
+        <body>
+            <if>
+                <expr>
+                    <op type="EQ">
+                        <mc name="charAt" target="java.lang.String">
+                            <read name="i" scope="local" type="int"/>
+                        </mc>
+                        <lit type="char"><![CDATA[n]]></lit>
+                    </op>
+                </expr>
+                <then>
+                    <unary type="POSTINC">
+                        <write name="count" scope="local" type="int"/>
+                    </unary>
+                </then>
+                <else/>
+            </if>
+            <if>
+                <expr>
+                    <op type="LT">
+                        <read name="count" scope="local" type="int"/>
+                        <lit type="int"><![CDATA[3]]></lit>
+                    </op>
+                </expr>
+                <then>
+                    <mc name="print" target="java.io.PrintStream">
+                        <mc name="charAt" target="java.lang.String">
+                            <read name="i" scope="local" type="int"/>
+                        </mc>
+                    </mc>
+                </then>
+                <else/>
+            </if>
+            <unary type="POSTINC">
+                <write name="i" scope="local" type="int"/>
+            </unary>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream"/>
+    <assign>
+        <write name="i" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <if>
+        <expr>
+            <mc name="contains" target="java.lang.String">
+                <lit type="String"><![CDATA[l]]></lit>
+            </mc>
+        </expr>
+        <then>
+            <while>
+                <expr>
+                    <op type="LT">
+                        <read name="i" scope="local" type="int"/>
+                        <mc name="length" target="java.lang.String"/>
+                    </op>
+                </expr>
+                <body>
+                    <if>
+                        <expr>
+                            <op type="EQ">
+                                <mc name="charAt" target="java.lang.String">
+                                    <read name="i" scope="local" type="int"/>
+                                </mc>
+                                <lit type="char"><![CDATA[l]]></lit>
+                            </op>
+                        </expr>
+                        <then>
+                            <mc name="println" target="java.io.PrintStream">
+                                <read name="i" scope="local" type="int"/>
+                            </mc>
+                            <break/>
+                        </then>
+                        <else/>
+                    </if>
+                    <unary type="POSTINC">
+                        <write name="i" scope="local" type="int"/>
+                    </unary>
+                </body>
+            </while>
+        </then>
+        <else>
+            <mc name="println" target="java.io.PrintStream">
+                <unary type="NEG">
+                    <lit type="int"><![CDATA[1]]></lit>
+                </unary>
+            </mc>
+        </else>
+    </if>
+    <var name="j" scope="local" type="int">
+        <assign>
+            <write name="j" scope="local" type="int"/>
+            <lit type="int"><![CDATA[28]]></lit>
+        </assign>
+    </var>
+    <while>
+        <expr>
+            <op type="LT">
+                <read name="j" scope="local" type="int"/>
+                <lit type="int"><![CDATA[280]]></lit>
+            </op>
+        </expr>
+        <body>
+            <if>
+                <expr>
+                    <op type="EQ">
+                        <op type="MOD">
+                            <read name="j" scope="local" type="int"/>
+                            <lit type="int"><![CDATA[21]]></lit>
+                        </op>
+                        <lit type="int"><![CDATA[0]]></lit>
+                    </op>
+                </expr>
+                <then>
+                    <mc name="print" target="java.io.PrintStream">
+                        <op type="PLUS">
+                            <read name="j" scope="local" type="int"/>
+                            <lit type="String"><![CDATA[ ]]></lit>
+                        </op>
+                    </mc>
+                </then>
+                <else/>
+            </if>
+            <assign>
+                <write name="j" scope="local" type="int"/>
+                <op type="PLUS">
+                    <read name="j" scope="local" type="int"/>
+                    <lit type="int"><![CDATA[2]]></lit>
+                </op>
+            </assign>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream"/>
+    <assign>
+        <write name="i" scope="local" type="int"/>
+        <op type="MINUS">
+            <mc name="length" target="java.lang.String"/>
+            <lit type="int"><![CDATA[2]]></lit>
+        </op>
+    </assign>
+    <while>
+        <expr>
+            <op type="GE">
+                <read name="i" scope="local" type="int"/>
+                <lit type="int"><![CDATA[0]]></lit>
+            </op>
+        </expr>
+        <body>
+            <if>
+                <expr>
+                    <op type="AND">
+                        <op type="NE">
+                            <mc name="charAt" target="java.lang.String">
+                                <read name="i" scope="local" type="int"/>
+                            </mc>
+                            <lit type="char"><![CDATA[s]]></lit>
+                        </op>
+                        <op type="NE">
+                            <mc name="charAt" target="java.lang.String">
+                                <read name="i" scope="local" type="int"/>
+                            </mc>
+                            <lit type="char"><![CDATA[S]]></lit>
+                        </op>
+                    </op>
+                </expr>
+                <then>
+                    <mc name="print" target="java.io.PrintStream">
+                        <mc name="charAt" target="java.lang.String">
+                            <read name="i" scope="local" type="int"/>
+                        </mc>
+                    </mc>
+                </then>
+                <else/>
+            </if>
+            <assign>
+                <write name="i" scope="local" type="int"/>
+                <op type="MINUS">
+                    <read name="i" scope="local" type="int"/>
+                    <lit type="int"><![CDATA[2]]></lit>
+                </op>
+            </assign>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream"/>
+    <assign>
+        <write name="count" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <assign>
+        <write name="i" scope="local" type="int"/>
+        <lit type="int"><![CDATA[0]]></lit>
+    </assign>
+    <while>
+        <expr>
+            <op type="LT">
+                <read name="i" scope="local" type="int"/>
+                <mc name="length" target="java.lang.String"/>
+            </op>
+        </expr>
+        <body>
+            <if>
+                <expr>
+                    <op type="OR">
+                        <op type="OR">
+                            <op type="EQ">
+                                <mc name="charAt" target="java.lang.String">
+                                    <read name="i" scope="local" type="int"/>
+                                </mc>
+                                <lit type="char"><![CDATA[ ]]></lit>
+                            </op>
+                            <op type="EQ">
+                                <mc name="charAt" target="java.lang.String">
+                                    <read name="i" scope="local" type="int"/>
+                                </mc>
+                                <lit type="char"><![CDATA[.]]></lit>
+                            </op>
+                        </op>
+                        <op type="EQ">
+                            <mc name="charAt" target="java.lang.String">
+                                <read name="i" scope="local" type="int"/>
+                            </mc>
+                            <lit type="char"><![CDATA[,]]></lit>
+                        </op>
+                    </op>
+                </expr>
+                <then>
+                    <unary type="POSTINC">
+                        <write name="count" scope="local" type="int"/>
+                    </unary>
+                </then>
+                <else/>
+            </if>
+            <unary type="POSTINC">
+                <write name="i" scope="local" type="int"/>
+            </unary>
+        </body>
+    </while>
+    <mc name="println" target="java.io.PrintStream">
+        <read name="count" scope="local" type="int"/>
+    </mc>
+</ast>

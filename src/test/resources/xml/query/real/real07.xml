@@ -1,0 +1,25 @@
+<container mode="any">
+    <while direct="true">
+        <if>
+            <then direct="true">
+                <assign/>
+                <break direct="true"/>
+            </then>
+        </if>
+    </while>
+    <while direct="true">
+        <expr mode="unordered" direct="true">
+            <op type="AND" mode="any" direct="true">
+                <op type="EQ" direct="true">
+                    <read direct="true"/>
+                </op>
+                <op type="LT" direct="true">
+                    <read direct="true"/>
+                </op>
+                <op type="LE" direct="true">
+                    <read direct="true"/>
+                </op>
+            </op>
+        </expr>
+    </while>
+</container>

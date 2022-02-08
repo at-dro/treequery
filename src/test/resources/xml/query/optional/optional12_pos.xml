@@ -1,0 +1,10 @@
+<!-- POSITIVE: partial inner structure with non-existent subtree -->
+<container>
+    <a mode="optional">
+        <b/>
+        <z>
+            <e/>
+            <f/>
+        </z>
+    </a>
+</container>

@@ -1,0 +1,18 @@
+<!-- NEGATIVE: full tree with non-existent leaf -->
+<container>
+    <a>
+        <b>
+            <c/>
+        </b>
+        <d mode="exact">
+            <e/>
+            <z/>
+            <f/>
+        </d>
+        <g/>
+        <d>
+            <f/>
+        </d>
+    </a>
+    <h/>
+</container>

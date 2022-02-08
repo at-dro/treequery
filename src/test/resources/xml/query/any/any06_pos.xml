@@ -1,0 +1,9 @@
+<!-- POSITIVE: partial inner structure -->
+<container mode="any">
+    <d>
+        <e/>
+    </d>
+    <d>
+        <f/>
+    </d>
+</container>

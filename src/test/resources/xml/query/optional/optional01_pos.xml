@@ -1,0 +1,17 @@
+<!-- POSITIVE: full subject tree -->
+<container mode="optional">
+    <a mode="optional">
+        <b mode="optional">
+            <c mode="optional"/>
+        </b>
+        <d mode="optional">
+            <e mode="optional"/>
+            <f mode="optional"/>
+        </d>
+        <g mode="optional"/>
+        <d mode="optional">
+            <f mode="optional"/>
+        </d>
+    </a>
+    <h mode="optional"/>
+</container>

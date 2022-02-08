@@ -1,0 +1,17 @@
+<!-- POSITIVE: full subject tree -->
+<container>
+    <a>
+        <b>
+            <c/>
+        </b>
+        <d>
+            <e/>
+            <f/>
+        </d>
+        <g/>
+        <d>
+            <f/>
+        </d>
+    </a>
+    <h/>
+</container>

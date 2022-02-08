@@ -1,0 +1,7 @@
+<container>
+    <while direct="true">
+        <assign>
+            <op type="MINUS"/>
+        </assign>
+    </while>
+</container>

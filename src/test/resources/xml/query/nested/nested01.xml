@@ -1,0 +1,9 @@
+<container>
+    <a direct="true" mode="any">
+        <b direct="true"/>
+        <container>
+            <c direct="true"/>
+            <d direct="true"/>
+        </container>
+    </a>
+</container>

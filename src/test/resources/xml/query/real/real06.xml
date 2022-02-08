@@ -1,0 +1,8 @@
+<container mode="unordered">
+    <lit>n</lit>
+    <lit>l</lit>
+    <container mode="any">
+        <lit>s</lit>
+        <lit>S</lit>
+    </container>
+</container>

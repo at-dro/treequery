@@ -1,0 +1,17 @@
+<!-- POSITIVE: full subject tree -->
+<container mode="unordered">
+    <a mode="unordered">
+        <b mode="unordered">
+            <c mode="unordered"/>
+        </b>
+        <d mode="unordered">
+            <e mode="unordered"/>
+            <f mode="unordered"/>
+        </d>
+        <g mode="unordered"/>
+        <d mode="unordered">
+            <f mode="unordered"/>
+        </d>
+    </a>
+    <h mode="unordered"/>
+</container>

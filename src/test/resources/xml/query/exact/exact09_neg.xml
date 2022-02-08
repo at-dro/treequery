@@ -1,0 +1,5 @@
+<!-- NEGATIVE: two unordered leaves -->
+<container mode="exact">
+    <h/>
+    <c/>
+</container>

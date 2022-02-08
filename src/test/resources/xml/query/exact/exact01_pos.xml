@@ -1,0 +1,17 @@
+<!-- POSITIVE: full subject tree -->
+<container mode="exact">
+    <a mode="exact">
+        <b mode="exact">
+            <c mode="exact"/>
+        </b>
+        <d mode="exact">
+            <e mode="exact"/>
+            <f mode="exact"/>
+        </d>
+        <g mode="exact"/>
+        <d mode="exact">
+            <f mode="exact"/>
+        </d>
+    </a>
+    <h mode="exact"/>
+</container>

@@ -1,0 +1,4 @@
+<!-- POSITIVE: Leaf node with all properties -->
+<container>
+    <a p4="v4" p5="v5a"/>
+</container>

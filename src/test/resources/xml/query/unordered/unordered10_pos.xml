@@ -1,0 +1,8 @@
+<!-- POSITIVE: duplicated node -->
+<container mode="unordered">
+    <d>
+        <e/>
+        <f/>
+    </d>
+    <e/>
+</container>

@@ -1,0 +1,5 @@
+<!-- POSITIVE: two non-existent leaf nodes -->
+<container mode="optional">
+    <y/>
+    <z/>
+</container>

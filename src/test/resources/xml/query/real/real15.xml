@@ -1,0 +1,18 @@
+<container mode="unordered">
+    <lit type="char"><![CDATA[ ]]></lit>
+    <lit type="char">.</lit>
+    <lit type="char">,</lit>
+    <while direct="true">
+        <body direct="true">
+            <if direct="true">
+                <then mode="any" direct="true">
+                    <unary type="POSTINC"/>
+                    <unary type="PREINC"/>
+                    <assign>
+                        <op type="PLUS"/>
+                    </assign>
+                </then>
+            </if>
+        </body>
+    </while>
+</container>

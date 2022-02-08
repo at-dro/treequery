@@ -1,0 +1,11 @@
+<container>
+    <while direct="true">
+        <if>
+            <then direct="true">
+                <mc name="print" direct="true">
+                    <read/>
+                </mc>
+            </then>
+        </if>
+    </while>
+</container>

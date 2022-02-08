@@ -1,0 +1,17 @@
+<!-- POSITIVE: full subject tree -->
+<container mode="any">
+    <a mode="any">
+        <b mode="any">
+            <c mode="any"/>
+        </b>
+        <d mode="any">
+            <e mode="any"/>
+            <f mode="any"/>
+        </d>
+        <g mode="any"/>
+        <d mode="any">
+            <f mode="any"/>
+        </d>
+    </a>
+    <h mode="any"/>
+</container>
