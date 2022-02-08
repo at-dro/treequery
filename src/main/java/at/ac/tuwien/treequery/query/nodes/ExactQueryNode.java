@@ -22,11 +22,16 @@ public class ExactQueryNode extends ContainerQueryNode {
 
             states = states
                     .flatMap(candidate -> handleCandidate(candidate, query, matchOne))
-
                     .distinct();
 
             exactEnd = isSingle || query instanceof ExactQueryNode;
         }
+
+        if (exactEnd) {
+            // The last query needs to match the last child of the subject node, i.e. no node may be left at the end
+            states = states.filter(state -> state.getElement() == null);
+        }
+
         return states;
     }
 
