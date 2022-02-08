@@ -2,30 +2,16 @@ package at.ac.tuwien.treequery.xml;
 
 import at.ac.tuwien.treequery.subject.BaseSubjectNode;
 import at.ac.tuwien.treequery.subject.SubjectNode;
-import org.w3c.dom.Document;
-import org.xml.sax.SAXException;
 
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
-public class XmlSubjectParser {
+public class SubjectXmlConverter extends XmlConverter<SubjectNode> {
 
-    public List<SubjectNode> parse(InputStream data) throws IOException {
-        try {
-            Document document = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(data);
-            XmlNode root = new XmlNode(document.getDocumentElement());
-            return root.getChildren().map(this::parse).collect(Collectors.toList());
-        } catch (SAXException | ParserConfigurationException e) {
-            throw new IOException(e);
-        }
-    }
-
+    @Override
     public SubjectNode parse(XmlNode node) {
         // Load children and properties
         List<SubjectNode> children = node.getChildren().map(this::parse).collect(Collectors.toList());
@@ -37,5 +23,21 @@ public class XmlSubjectParser {
         }
 
         return new BaseSubjectNode(node.getName(), Collections.unmodifiableMap(properties), children);
+    }
+
+    @Override
+    protected XmlCreator createXml(SubjectNode node, XmlCreator parent) {
+        XmlCreator xml = XmlCreator.createElement(node.getType(), parent);
+        node.getProperties().forEach((key, value) -> setXmlAttribute(xml, key, value));
+        node.getChildren().forEach(child -> createXml(child, xml));
+        return xml;
+    }
+
+    private void setXmlAttribute(XmlCreator xml, String key, Object value) {
+        if (key.equals("value")) {
+            xml.setText(Objects.toString(value));
+        } else {
+            xml.setAttribute(key, Objects.toString(value, ""));
+        }
     }
 }

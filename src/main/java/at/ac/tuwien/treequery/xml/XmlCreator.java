@@ -26,21 +26,33 @@ public class XmlCreator {
      * Construct a creator for the root element of a new XML document
      *
      * @param root The tag name of the root element
-     * @throws IOException Thrown if the XML document could not be created
+     * @throws XmlException Thrown if the XML document could not be created
      */
-    public XmlCreator(String root) throws IOException {
+    public XmlCreator(String root) {
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
             element = document.createElement(root);
             document.appendChild(element);
         } catch (ParserConfigurationException e) {
-            throw new IOException("Failed to create XML document", e);
+            throw new XmlException("Failed to create XML document", e);
         }
     }
 
     private XmlCreator(Document document, Element element) {
         this.document = document;
         this.element = element;
+    }
+
+    /**
+     * Create a new element in the XML tree
+     *
+     * @param name The tag name of the element
+     * @param parent The XmlCreator associated with the parent, or null to create the root element of a new XML document
+     * @return An XmlCreator instance wrapping the new element
+     * @throws XmlException Thrown if the XML document could not be created
+     */
+    public static XmlCreator createElement(String name, XmlCreator parent) {
+        return parent == null ? new XmlCreator(name) : parent.appendChild(name);
     }
 
     /**
@@ -95,7 +107,7 @@ public class XmlCreator {
 
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
             transformer.transform(new DOMSource(document), new StreamResult(out));
         } catch (TransformerException e) {

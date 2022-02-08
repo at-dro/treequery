@@ -6,23 +6,30 @@ import at.ac.tuwien.treequery.query.nodes.ExactQueryNode;
 import at.ac.tuwien.treequery.query.nodes.QueryNode;
 import at.ac.tuwien.treequery.query.nodes.SingleQueryNode;
 
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
-public class XmlQueryParser {
+public class QueryXmlConverter extends XmlConverter<QueryNode> {
 
-    private final String root;
+    private final Set<String> containerTags;
 
-    public XmlQueryParser() {
-        this.root = "query";
+    /**
+     * Create a new XML converter for queries
+     *
+     * @param containerTags Optional additional tag names to be used for containers
+     */
+    public QueryXmlConverter(String... containerTags) {
+        this.containerTags = new HashSet<>();
+        this.containerTags.addAll(Arrays.asList("query", "group", "container"));
+        this.containerTags.addAll(Arrays.asList(containerTags));
     }
 
-    public XmlQueryParser(String root) {
-        this.root = root;
-    }
-
+    @Override
     public QueryNode parse(XmlNode node) {
         Map<String, String> properties = node.getAttributes();
 
@@ -33,7 +40,7 @@ public class XmlQueryParser {
         List<QueryNode> children = node.getChildren().map(this::parse).collect(Collectors.toList());
         QueryNode childrenContainer = getChildrenContainer(mode, children);
 
-        if (node.getName().equals(root) || node.getName().equals("group")) {
+        if (containerTags.contains(node.getName())) {
             // Structural query node, return the children container directly
             return childrenContainer;
         }
@@ -75,5 +82,11 @@ public class XmlQueryParser {
             default:
                 throw new IllegalArgumentException("Unknown child mode " + mode);
         }
+    }
+
+    @Override
+    protected XmlCreator createXml(QueryNode node, XmlCreator parent) {
+        // We do not currently support this
+        throw new UnsupportedOperationException();
     }
 }
