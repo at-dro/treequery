@@ -160,4 +160,9 @@ public class MatchingState {
     public int hashCode() {
         return Objects.hash(root, element, references);
     }
+
+    @Override
+    public String toString() {
+        return String.format("State[%s]", element != null ? element.node() : null);
+    }
 }

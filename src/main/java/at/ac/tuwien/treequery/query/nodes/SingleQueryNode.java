@@ -53,4 +53,9 @@ public class SingleQueryNode implements QueryNode {
     public boolean hasReferences() {
         return hasReferences;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Single[%s, %s, direct=%s, reference=%s]", name, properties, direct, reference);
+    }
 }

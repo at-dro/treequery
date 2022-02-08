@@ -97,4 +97,9 @@ public class BaseSubjectNode implements SubjectNode {
     public List<? extends SubjectNode> getChildren() {
         return children;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s, %s, children=%d", type, properties, children.size());
+    }
 }

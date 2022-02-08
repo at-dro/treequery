@@ -172,4 +172,9 @@ public class LinkedSubjectNode implements Comparable<LinkedSubjectNode> {
     public int compareTo(LinkedSubjectNode that) {
         return this != that ? Arrays.compare(this.path, that.path) : 0;
     }
+
+    @Override
+    public String toString() {
+        return String.format("Linked[%s]", node);
+    }
 }
