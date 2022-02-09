@@ -79,6 +79,9 @@ class CDATAOutputStreamWrapper extends OutputStream {
                         // CDATA end tag completed, move on to next state
                         state = 3;
                     }
+                } else {
+                    // Missing something in the end tag, start again
+                    tagIndex = 0;
                 }
                 break;
             case 3:
@@ -93,11 +96,22 @@ class CDATAOutputStreamWrapper extends OutputStream {
 
     @Override
     public void flush() throws IOException {
+        writeBuffer();
         out.flush();
     }
 
     @Override
     public void close() throws IOException {
+        writeBuffer();
         out.close();
+    }
+
+    private void writeBuffer() throws IOException {
+        // At the end of the document, a newline (but nothing else) is buffered
+        // Make sure to print it when the XML transformer calls flush
+        if (state == 1 && numSpace == 0 && tagIndex == 0) {
+            out.write('\n');
+            state = 0;
+        }
     }
 }

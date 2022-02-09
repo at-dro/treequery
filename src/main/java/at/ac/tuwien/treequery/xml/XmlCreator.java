@@ -110,6 +110,9 @@ public class XmlCreator {
             transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
 
             transformer.transform(new DOMSource(document), new StreamResult(out));
+
+            // The transformer should call flush anyway, but do it explicitly (there might be differences between JVM versions)
+            out.flush();
         } catch (TransformerException e) {
             throw new IOException("Failed to write XML file", e);
         }
