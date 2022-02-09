@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- POSITIVE: skip the first level of the "a" subtree, but set the "direct" flag everywhere else -->
 <container>
     <b>

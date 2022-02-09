@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- NEGATIVE: Single node with non-existent property -->
 <container>
     <b p1="v6a"/>

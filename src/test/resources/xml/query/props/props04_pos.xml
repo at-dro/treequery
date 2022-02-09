@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- POSITIVE: Leaf node with all properties -->
 <container>
     <a p4="v4" p5="v5a"/>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- NEGATIVE: Single node with incorrect property -->
 <container>
     <a p1="v1c"/>

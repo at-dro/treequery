@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- POSITIVE: Inner node with all properties -->
 <container>
     <c p7="v7" p8="v8"/>

@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- NEGATIVE: Partial structure with non-existent property -->
 <container>
     <b p2="v2" p3="v3" p5="v5a">

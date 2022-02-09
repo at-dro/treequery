@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- NEGATIVE: Single node with all properties matching, but type incorrect -->
 <container>
     <a p2="v2" p3="v3" p5="v5a"/>
