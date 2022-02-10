@@ -9,7 +9,7 @@ import java.util.List;
 public class SubjectNodeBuilder {
 
     private final String type;
-    private final PropertiesBuilder properties = new PropertiesBuilder();
+    private final PropertiesBuilder properties = PropertiesBuilder.props();
     private final List<SubjectNode> children = new LinkedList<>();
 
     private SubjectNodeBuilder(String type) {
