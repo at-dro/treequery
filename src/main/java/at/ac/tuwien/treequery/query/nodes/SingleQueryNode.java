@@ -9,15 +9,15 @@ import java.util.stream.Stream;
 
 public class SingleQueryNode implements QueryNode {
 
-    private final String name;
+    private final String type;
     private final Map<String, Object> properties;
     private final QueryNode children;
     private final boolean direct;
     private final String reference;
     private final boolean hasReferences;
 
-    public SingleQueryNode(String name, Map<String, Object> properties, QueryNode children, boolean direct, String reference) {
-        this.name = name;
+    public SingleQueryNode(String type, Map<String, Object> properties, QueryNode children, boolean direct, String reference) {
+        this.type = type;
         this.properties = properties;
         this.children = children;
         this.direct = direct;
@@ -34,7 +34,7 @@ public class SingleQueryNode implements QueryNode {
     }
 
     private boolean matches(NodeReferences references, LinkedSubjectNode element) {
-        return element.node().matches(name, properties, references.getData());
+        return element.node().matches(type, properties, references.getData());
     }
 
     private Stream<MatchingState> handleCandidate(MatchingState state, LinkedSubjectNode element) {
@@ -56,6 +56,6 @@ public class SingleQueryNode implements QueryNode {
 
     @Override
     public String toString() {
-        return String.format("Single[%s, %s, direct=%s, reference=%s]", name, properties, direct, reference);
+        return String.format("Single[%s, %s, direct=%s, reference=%s]", type, properties, direct, reference);
     }
 }
