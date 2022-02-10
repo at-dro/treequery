@@ -35,4 +35,8 @@ public class AllQueryNode extends ContainerQueryNode {
 
         return result;
     }
+
+    public boolean isOrdered() {
+        return ordered;
+    }
 }

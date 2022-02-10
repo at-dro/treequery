@@ -41,4 +41,8 @@ public class AnyQueryNode extends ContainerQueryNode {
 
         return optional && states.isEmpty() ? Stream.of(start) : states.stream();
     }
+
+    public boolean isOptional() {
+        return optional;
+    }
 }

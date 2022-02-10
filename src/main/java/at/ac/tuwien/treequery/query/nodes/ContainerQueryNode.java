@@ -16,4 +16,8 @@ public abstract class ContainerQueryNode implements QueryNode {
     public boolean hasReferences() {
         return hasReferences;
     }
+
+    public List<QueryNode> getChildren() {
+        return children;
+    }
 }

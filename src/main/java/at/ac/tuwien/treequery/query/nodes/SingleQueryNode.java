@@ -54,6 +54,26 @@ public class SingleQueryNode implements QueryNode {
         return hasReferences;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public Map<String, Object> getProperties() {
+        return properties;
+    }
+
+    public QueryNode getChildren() {
+        return children;
+    }
+
+    public boolean isDirect() {
+        return direct;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
     @Override
     public String toString() {
         return String.format("Single[%s, %s, direct=%s, reference=%s]", type, properties, direct, reference);
