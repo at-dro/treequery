@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<container mode="unordered">
+    <b mode="optional" p2="v2" p3="v3" ref="foo">
+        <b p6="v6a"/>
+        <container mode="exact">
+            <f direct="true" ref="bar"/>
+        </container>
+        <c direct="true" p6="v6b"/>
+    </b>
+    <a>
+        <d direct="true"/>
+    </a>
+</container>

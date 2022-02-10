@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<root>
+    <a p1="va">
+        <b p1="vb"><![CDATA[1234]]></b>
+        <c p1="vc"><![CDATA[    ]]></c>
+        <d p1="vd"><![CDATA[
+]]></d>
+        <e p1="ve"><![CDATA[foo]]></e>
+        <f p1="vf"/>
+        <g p1="vg" value=""/>
+    </a>
+    <h><![CDATA[bar]]></h>
+</root>
