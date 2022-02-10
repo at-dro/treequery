@@ -9,6 +9,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Objects;
 
 public abstract class XmlConverter<T> {
 
@@ -41,4 +42,19 @@ public abstract class XmlConverter<T> {
     }
 
     protected abstract XmlCreator createXml(T node, XmlCreator parent);
+
+    protected void setXmlAttribute(XmlCreator xml, String key, Object value) {
+        if (key.equals("value")) {
+            String strValue = Objects.toString(value);
+            if (strValue.isEmpty()) {
+                // XML export does not keep empty CDATA blocks, use attribute in that case
+                xml.setAttribute("value", "");
+            } else {
+                // Otherwise, store it as text content
+                xml.setText(strValue);
+            }
+        } else {
+            xml.setAttribute(key, Objects.toString(value, ""));
+        }
+    }
 }

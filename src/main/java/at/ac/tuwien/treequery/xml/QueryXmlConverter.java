@@ -2,6 +2,7 @@ package at.ac.tuwien.treequery.xml;
 
 import at.ac.tuwien.treequery.query.nodes.AllQueryNode;
 import at.ac.tuwien.treequery.query.nodes.AnyQueryNode;
+import at.ac.tuwien.treequery.query.nodes.ContainerQueryNode;
 import at.ac.tuwien.treequery.query.nodes.ExactQueryNode;
 import at.ac.tuwien.treequery.query.nodes.QueryNode;
 import at.ac.tuwien.treequery.query.nodes.SingleQueryNode;
@@ -86,7 +87,65 @@ public class QueryXmlConverter extends XmlConverter<QueryNode> {
 
     @Override
     protected XmlCreator createXml(QueryNode node, XmlCreator parent) {
-        // We do not currently support this
-        throw new UnsupportedOperationException();
+        if (node instanceof ContainerQueryNode) {
+            return createXml((ContainerQueryNode) node, parent);
+        }
+
+        if (node instanceof SingleQueryNode) {
+            return createXml((SingleQueryNode) node, parent);
+        }
+
+        throw new IllegalArgumentException("Unknown query node " + node.getClass());
+    }
+
+    private XmlCreator createXml(ContainerQueryNode node, XmlCreator parent) {
+        XmlCreator xml = XmlCreator.createElement("container", parent);
+        applyContainerXml(node, xml);
+        return xml;
+    }
+
+    private void applyContainerXml(ContainerQueryNode node, XmlCreator xml) {
+        String mode = getContainerMode(node);
+        if (mode != null) {
+            setXmlAttribute(xml, "mode", mode);
+        }
+
+        node.getChildren().forEach(child -> createXml(child, xml));
+    }
+
+    private XmlCreator createXml(SingleQueryNode node, XmlCreator parent) {
+        XmlCreator xml = XmlCreator.createElement(node.getType(), parent);
+
+        node.getProperties().forEach((key, value) -> setXmlAttribute(xml, key, value));
+        if (node.isDirect()) {
+            setXmlAttribute(xml, "direct", "true");
+        }
+        if (node.getReference() != null) {
+            setXmlAttribute(xml, "ref", node.getReference());
+        }
+
+        if (node.getChildren() instanceof ContainerQueryNode) {
+            // Unwrap the children container
+            applyContainerXml((ContainerQueryNode) node.getChildren(), xml);
+        } else {
+            // Otherwise, just call the XML logic recursively
+            createXml(node.getChildren(), xml);
+        }
+
+        return xml;
+    }
+
+    private String getContainerMode(ContainerQueryNode container) {
+        if (container instanceof ExactQueryNode) {
+            return "exact";
+        }
+        if (container instanceof AllQueryNode) {
+            // "ordered" is the default mode
+            return ((AllQueryNode) container).isOrdered() ? null : "unordered";
+        }
+        if (container instanceof AnyQueryNode) {
+            return ((AnyQueryNode) container).isOptional() ? "optional" : "any";
+        }
+        throw new IllegalArgumentException("Unknown query container " + container.getClass());
     }
 }
