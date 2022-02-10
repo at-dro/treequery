@@ -70,9 +70,30 @@ public class XmlNode {
      * @return The text value, if this is a non-empty text node
      */
     public Optional<String> getValue() {
-        return Optional.ofNullable(node.getFirstChild())
-                .map(Node::getNodeValue)
-                .filter(n -> !n.isBlank());
+        StringBuilder result = new StringBuilder();
+        boolean hasContent = false;
+
+        for (Node child = node.getFirstChild(); child != null; child = child.getNextSibling()) {
+            // Check all immediate children for text (do not collect text recursively)
+            String content = child.getNodeValue();
+            switch (child.getNodeType()) {
+                case 3:
+                    // Regular text node: Ignore surrounding whitespace
+                    if (!content.isBlank()) {
+                        // Only add if not empty or blank
+                        hasContent = true;
+                        result.append(content.trim());
+                    }
+                    break;
+                case 4:
+                    // CDATA node: Keep it as is
+                    hasContent = true;
+                    result.append(content);
+                    break;
+            }
+        }
+
+        return hasContent ? Optional.of(result.toString()) : Optional.empty();
     }
 
     /**
