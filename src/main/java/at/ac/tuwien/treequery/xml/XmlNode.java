@@ -77,7 +77,7 @@ public class XmlNode {
             // Check all immediate children for text (do not collect text recursively)
             String content = child.getNodeValue();
             switch (child.getNodeType()) {
-                case 3:
+                case Node.TEXT_NODE:
                     // Regular text node: Ignore surrounding whitespace
                     if (!content.isBlank()) {
                         // Only add if not empty or blank
@@ -85,7 +85,7 @@ public class XmlNode {
                         result.append(content.trim());
                     }
                     break;
-                case 4:
+                case Node.CDATA_SECTION_NODE:
                     // CDATA node: Keep it as is
                     hasContent = true;
                     result.append(content);
