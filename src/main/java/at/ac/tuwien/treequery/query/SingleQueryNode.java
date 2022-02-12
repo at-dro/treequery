@@ -1,8 +1,8 @@
-package at.ac.tuwien.treequery.query.nodes;
+package at.ac.tuwien.treequery.query;
 
-import at.ac.tuwien.treequery.query.state.LinkedSubjectNode;
-import at.ac.tuwien.treequery.query.state.MatchingState;
-import at.ac.tuwien.treequery.query.state.NodeReferences;
+import at.ac.tuwien.treequery.matching.LinkedSubjectNode;
+import at.ac.tuwien.treequery.matching.MatchingState;
+import at.ac.tuwien.treequery.matching.NodeReferences;
 
 import java.util.Map;
 import java.util.stream.Stream;

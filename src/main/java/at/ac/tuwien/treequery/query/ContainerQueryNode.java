@@ -1,4 +1,4 @@
-package at.ac.tuwien.treequery.query.nodes;
+package at.ac.tuwien.treequery.query;
 
 import java.util.List;
 

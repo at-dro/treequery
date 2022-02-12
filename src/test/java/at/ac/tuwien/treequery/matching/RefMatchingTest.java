@@ -3,8 +3,7 @@ package at.ac.tuwien.treequery.matching;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import at.ac.tuwien.treequery.query.nodes.QueryNode;
-import at.ac.tuwien.treequery.query.state.MatchingState;
+import at.ac.tuwien.treequery.query.QueryNode;
 import at.ac.tuwien.treequery.subject.SubjectNode;
 import at.ac.tuwien.treequery.xml.QueryXmlConverter;
 import at.ac.tuwien.treequery.xml.SubjectXmlConverter;

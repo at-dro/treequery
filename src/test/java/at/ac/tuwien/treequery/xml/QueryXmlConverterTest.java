@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import at.ac.tuwien.treequery.query.nodes.AllQueryNode;
-import at.ac.tuwien.treequery.query.nodes.AnyQueryNode;
-import at.ac.tuwien.treequery.query.nodes.ContainerQueryNode;
-import at.ac.tuwien.treequery.query.nodes.QueryNode;
-import at.ac.tuwien.treequery.query.nodes.SingleQueryNode;
+import at.ac.tuwien.treequery.query.AllQueryNode;
+import at.ac.tuwien.treequery.query.AnyQueryNode;
+import at.ac.tuwien.treequery.query.ContainerQueryNode;
+import at.ac.tuwien.treequery.query.QueryNode;
+import at.ac.tuwien.treequery.query.SingleQueryNode;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;

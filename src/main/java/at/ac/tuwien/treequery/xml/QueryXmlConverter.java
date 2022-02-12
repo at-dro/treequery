@@ -1,11 +1,11 @@
 package at.ac.tuwien.treequery.xml;
 
-import at.ac.tuwien.treequery.query.nodes.AllQueryNode;
-import at.ac.tuwien.treequery.query.nodes.AnyQueryNode;
-import at.ac.tuwien.treequery.query.nodes.ContainerQueryNode;
-import at.ac.tuwien.treequery.query.nodes.ExactQueryNode;
-import at.ac.tuwien.treequery.query.nodes.QueryNode;
-import at.ac.tuwien.treequery.query.nodes.SingleQueryNode;
+import at.ac.tuwien.treequery.query.AllQueryNode;
+import at.ac.tuwien.treequery.query.AnyQueryNode;
+import at.ac.tuwien.treequery.query.ContainerQueryNode;
+import at.ac.tuwien.treequery.query.ExactQueryNode;
+import at.ac.tuwien.treequery.query.QueryNode;
+import at.ac.tuwien.treequery.query.SingleQueryNode;
 
 import java.util.Arrays;
 import java.util.Collections;

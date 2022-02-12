@@ -1,6 +1,6 @@
-package at.ac.tuwien.treequery.query.nodes;
+package at.ac.tuwien.treequery.query;
 
-import at.ac.tuwien.treequery.query.state.MatchingState;
+import at.ac.tuwien.treequery.matching.MatchingState;
 import at.ac.tuwien.treequery.subject.SubjectNode;
 
 import java.util.stream.Stream;

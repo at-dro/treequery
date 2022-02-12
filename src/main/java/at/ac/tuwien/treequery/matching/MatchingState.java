@@ -1,4 +1,4 @@
-package at.ac.tuwien.treequery.query.state;
+package at.ac.tuwien.treequery.matching;
 
 import at.ac.tuwien.treequery.subject.SubjectNode;
 
