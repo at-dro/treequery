@@ -5,6 +5,7 @@ import at.ac.tuwien.treequery.annotation.PublicApi;
 import at.ac.tuwien.treequery.matching.MatchingState;
 import at.ac.tuwien.treequery.subject.SubjectNode;
 
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -22,6 +23,17 @@ public interface QueryNode {
     @PublicApi
     default boolean hasMatches(SubjectNode node) {
         return findMatches(node).findAny().isPresent();
+    }
+
+    /**
+     * Obtains all matching collections of references in the subject tree rooted in the given subject node
+     *
+     * @param node The root node of the subject tree
+     * @return A stream of named references, or an empty stream if no match could be found
+     */
+    @PublicApi
+    default Stream<Map<String, SubjectNode>> findReferences(SubjectNode node) {
+        return findMatches(node).map(s -> s.getReferences().getData());
     }
 
     /**

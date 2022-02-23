@@ -10,6 +10,7 @@ import at.ac.tuwien.treequery.xml.SubjectXmlConverter;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 class RefMatchingTest {
@@ -21,15 +22,15 @@ class RefMatchingTest {
 
     @Test
     void ref01() throws Exception {
-        List<MatchingState> result = findMatches(SUBJECT, "ref/ref01");
+        List<Map<String, SubjectNode>> result = findMatches(SUBJECT, "ref/ref01");
 
         assertEquals(2, result.size(), "Expected two different results");
 
-        SubjectNode node1 = getRefNode(result.get(0), "refA");
+        SubjectNode node1 = result.get(0).get("refA");
         assertNodeType(node1, "a");
         assertNodeProp(node1, "p4", "v4");
 
-        SubjectNode node2 = getRefNode(result.get(1), "refA");
+        SubjectNode node2 = result.get(1).get("refA");
         assertNodeType(node2, "a");
         assertNodeProp(node2, "p4", "v4");
         assertNodeProp(node2, "p5", "v5a");
@@ -37,7 +38,7 @@ class RefMatchingTest {
 
     @Test
     void ref02() throws Exception {
-        List<MatchingState> result = findMatches(SUBJECT, "ref/ref02");
+        List<Map<String, SubjectNode>> result = findMatches(SUBJECT, "ref/ref02");
 
         assertEquals(7, result.size(), "Expected 7 different results");
 
@@ -71,14 +72,10 @@ class RefMatchingTest {
         assertNode(result.get(6), "ref3", "c", "p9", "v9");
     }
 
-    private List<MatchingState> findMatches(String subjectFile, String queryFile) throws Exception {
+    private List<Map<String, SubjectNode>> findMatches(String subjectFile, String queryFile) throws Exception {
         SubjectNode subject = subjectConverter.parseResource("xml/subject/" + subjectFile + ".xml");
         QueryNode query = queryConverter.parseResource("xml/query/" + queryFile + ".xml");
-        return query.findMatches(subject).collect(Collectors.toList());
-    }
-
-    private SubjectNode getRefNode(MatchingState state, String name) {
-        return state.getReferences().getData().get(name);
+        return query.findReferences(subject).collect(Collectors.toList());
     }
 
     private void assertNodeType(SubjectNode node, String type) {
@@ -89,14 +86,14 @@ class RefMatchingTest {
         assertEquals(value, node.getProperties().get(key));
     }
 
-    private void assertNode(MatchingState state, String ref, String type, String key, String value) {
-        SubjectNode node = getRefNode(state, ref);
+    private void assertNode(Map<String, SubjectNode> state, String ref, String type, String key, String value) {
+        SubjectNode node = state.get(ref);
         assertNodeType(node, type);
         assertNodeProp(node, key, value);
     }
 
-    private void assertNodeNull(MatchingState state, String ref) {
-        SubjectNode node = getRefNode(state, ref);
+    private void assertNodeNull(Map<String, SubjectNode> state, String ref) {
+        SubjectNode node = state.get(ref);
         assertNull(node, "Expected node for " + ref + " to be null");
     }
 }
