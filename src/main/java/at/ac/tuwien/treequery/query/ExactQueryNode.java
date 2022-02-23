@@ -1,13 +1,31 @@
 package at.ac.tuwien.treequery.query;
 
-import at.ac.tuwien.treequery.matching.MatchingState;
+import at.ac.tuwien.treequery.annotation.InternalApi;
+import at.ac.tuwien.treequery.builder.QueryNodeBuilder;
 import at.ac.tuwien.treequery.matching.LinkedSubjectNode;
+import at.ac.tuwien.treequery.matching.MatchingState;
+import at.ac.tuwien.treequery.xml.QueryXmlConverter;
 
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * This class represents an exact container query node
+ * <p>
+ * Third-party code should not use this class directly, but use the builder or XML converter and the {@link QueryNode} interface.
+ */
+@InternalApi
 public class ExactQueryNode extends ContainerQueryNode {
 
+    /**
+     * Creates a new exact container query node instance.
+     * <p>
+     * Third-party code should not call this constructor directly, but use the provided builder or XML converter
+     *
+     * @param children The list of child query nodes in this container
+     * @see QueryNodeBuilder#container
+     * @see QueryXmlConverter
+     */
     public ExactQueryNode(List<QueryNode> children) {
         super(children);
     }

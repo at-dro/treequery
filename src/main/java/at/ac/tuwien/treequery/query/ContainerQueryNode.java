@@ -1,7 +1,15 @@
 package at.ac.tuwien.treequery.query;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
+
 import java.util.List;
 
+/**
+ * This class is the base for all container query nodes
+ * <p>
+ * Third-party code should not use this class directly, but the {@link QueryNode} interface.
+ */
+@InternalApi
 public abstract class ContainerQueryNode implements QueryNode {
 
     protected final List<QueryNode> children;

@@ -1,5 +1,6 @@
 package at.ac.tuwien.treequery.xml;
 
+import at.ac.tuwien.treequery.annotation.PublicApi;
 import at.ac.tuwien.treequery.query.AllQueryNode;
 import at.ac.tuwien.treequery.query.AnyQueryNode;
 import at.ac.tuwien.treequery.query.ContainerQueryNode;
@@ -15,6 +16,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+/**
+ * This converter can be used to parse and write query trees as XML
+ */
+@PublicApi
 public class QueryXmlConverter extends XmlConverter<QueryNode> {
 
     private final Set<String> containerTags;
@@ -24,6 +29,7 @@ public class QueryXmlConverter extends XmlConverter<QueryNode> {
      *
      * @param containerTags Optional additional tag names to be used for containers
      */
+    @PublicApi
     public QueryXmlConverter(String... containerTags) {
         this.containerTags = new HashSet<>();
         this.containerTags.add("container");

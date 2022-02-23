@@ -1,5 +1,7 @@
 package at.ac.tuwien.treequery.subject;
 
+import at.ac.tuwien.treequery.annotation.PublicApi;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +12,7 @@ import java.util.stream.Stream;
  * This is just a simple base implementation for subject nodes with default matching implementations for the generic cases.<br>
  * Matching is split into multiple small methods, which allows parts to be overridden for more special subclasses.
  */
+@PublicApi
 public class BaseSubjectNode implements SubjectNode {
 
     private final String type;
@@ -40,6 +43,7 @@ public class BaseSubjectNode implements SubjectNode {
      * @param type The type the node should have, or null to allow any node type
      * @return True iff the given type is null or matches the node type
      */
+    @PublicApi
     protected boolean typeMatches(String type) {
         return type == null || type.equals(this.type);
     }
@@ -51,6 +55,7 @@ public class BaseSubjectNode implements SubjectNode {
      * @param references A collection of named node references that can be used for matching
      * @return True iff all given properties match the properties of this node
      */
+    @PublicApi
     protected boolean propertiesMatch(Map<String, Object> properties, Map<String, SubjectNode> references) {
         return properties == null || properties.entrySet().stream().allMatch(e -> propertyMatches(e.getKey(), e.getValue(), references));
     }
@@ -63,6 +68,7 @@ public class BaseSubjectNode implements SubjectNode {
      * @param references A collection of named node references that can be used for matching
      * @return True iff this node fulfills the given property
      */
+    @PublicApi
     protected boolean propertyMatches(String key, Object value, Map<String, SubjectNode> references) {
         return propertyMatches(key, value);
     }
@@ -74,6 +80,7 @@ public class BaseSubjectNode implements SubjectNode {
      * @param value The required value of the property
      * @return True iff this node fulfills the given property
      */
+    @PublicApi
     protected boolean propertyMatches(String key, Object value) {
         return Objects.equals(properties.get(key), value);
     }

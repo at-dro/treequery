@@ -1,5 +1,6 @@
 package at.ac.tuwien.treequery.matching;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
 import at.ac.tuwien.treequery.subject.SubjectNode;
 
 import java.util.Objects;
@@ -7,7 +8,10 @@ import java.util.stream.Stream;
 
 /**
  * This class contains the current matching state and provides methods to find candidates for the next matching steps
+ * <p>
+ * This class should not be used by third-party code directly.
  */
+@InternalApi
 public class MatchingState {
 
     private final NodeReferences references;

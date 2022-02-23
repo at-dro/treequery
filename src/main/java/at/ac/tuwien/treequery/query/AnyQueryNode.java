@@ -1,6 +1,9 @@
 package at.ac.tuwien.treequery.query;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
+import at.ac.tuwien.treequery.builder.QueryNodeBuilder;
 import at.ac.tuwien.treequery.matching.MatchingState;
+import at.ac.tuwien.treequery.xml.QueryXmlConverter;
 
 import java.util.HashSet;
 import java.util.List;
@@ -8,10 +11,26 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * This class represents an "any" or "optional" container query node
+ * <p>
+ * Third-party code should not use this class directly, but use the builder or XML converter and the {@link QueryNode} interface.
+ */
+@InternalApi
 public class AnyQueryNode extends ContainerQueryNode {
 
     private final boolean optional;
 
+    /**
+     * Creates a new "any" or "optional" container query node instance.
+     * <p>
+     * Third-party code should not call this constructor directly, but use the provided builder or XML converter
+     *
+     * @param children The list of child query nodes in this container
+     * @param optional Flag indicating whether the matching should be optional
+     * @see QueryNodeBuilder#container
+     * @see QueryXmlConverter
+     */
     public AnyQueryNode(List<QueryNode> children, boolean optional) {
         super(children);
         this.optional = optional;

@@ -1,12 +1,21 @@
 package at.ac.tuwien.treequery.query;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
+import at.ac.tuwien.treequery.builder.QueryNodeBuilder;
 import at.ac.tuwien.treequery.matching.LinkedSubjectNode;
 import at.ac.tuwien.treequery.matching.MatchingState;
 import at.ac.tuwien.treequery.matching.NodeReferences;
+import at.ac.tuwien.treequery.xml.QueryXmlConverter;
 
 import java.util.Map;
 import java.util.stream.Stream;
 
+/**
+ * This class represents a single container query node
+ * <p>
+ * Third-party code should not use this class directly, but use the builder or XML converter and the {@link QueryNode} interface.
+ */
+@InternalApi
 public class SingleQueryNode implements QueryNode {
 
     private final String type;
@@ -16,6 +25,19 @@ public class SingleQueryNode implements QueryNode {
     private final String reference;
     private final boolean hasReferences;
 
+    /**
+     * Creates a new exact container query node instance.
+     * <p>
+     * Third-party code should not call this constructor directly, but use the provided builder or XML converter
+     *
+     * @param type The type to match
+     * @param properties A collection of optional properties to match
+     * @param children The query node wrapping the child query
+     * @param direct Flag indicating whether only direct children should be matched
+     * @param reference The reference name used to store the matching subject node
+     * @see QueryNodeBuilder#single
+     * @see QueryXmlConverter
+     */
     public SingleQueryNode(String type, Map<String, Object> properties, QueryNode children, boolean direct, String reference) {
         this.type = type;
         this.properties = properties;

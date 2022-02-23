@@ -1,5 +1,6 @@
 package at.ac.tuwien.treequery.matching;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
 import at.ac.tuwien.treequery.subject.SubjectNode;
 
 import java.util.Arrays;
@@ -11,7 +12,10 @@ import java.util.stream.Stream;
 
 /**
  * This class wraps subject nodes in a linked structure to allow iterating along the tree
+ * <p>
+ * This class should not be used by third-party code directly.
  */
+@InternalApi
 public class LinkedSubjectNode implements Comparable<LinkedSubjectNode> {
 
     private final SubjectNode node;
@@ -19,10 +23,22 @@ public class LinkedSubjectNode implements Comparable<LinkedSubjectNode> {
     private final LinkedSubjectNode parent;
     private final List<LinkedSubjectNode> children;
 
+    /**
+     * Wraps the root node of a subject tree
+     *
+     * @param node The subject node representing the root node
+     */
     public LinkedSubjectNode(SubjectNode node) {
         this(node, null, 0);
     }
 
+    /**
+     * Wraps a child node in a subject tree
+     *
+     * @param node The subject node to wrap
+     * @param parent The wrapper for the subject node's parent
+     * @param index The index within the parent's children list
+     */
     private LinkedSubjectNode(SubjectNode node, LinkedSubjectNode parent, int index) {
         this.node = node;
         this.parent = parent;

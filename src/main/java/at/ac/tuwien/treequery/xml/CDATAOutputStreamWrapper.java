@@ -1,5 +1,7 @@
 package at.ac.tuwien.treequery.xml;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
+
 import java.io.IOException;
 import java.io.OutputStream;
 
@@ -7,6 +9,7 @@ import java.io.OutputStream;
  * This class wraps an OutputStream and filters all whitespace around CDATA blocks<br>
  * This addresses a bug in Java <14: https://bugs.openjdk.java.net/browse/JDK-8223291
  */
+@InternalApi
 class CDATAOutputStreamWrapper extends OutputStream {
 
     private static final String CDATA_START = "<![CDATA[";

@@ -1,9 +1,20 @@
 package at.ac.tuwien.treequery.subject;
 
+import at.ac.tuwien.treequery.annotation.InternalApi;
+import at.ac.tuwien.treequery.annotation.PublicApi;
+
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
+/**
+ * This interface represents nodes in the subject tree.
+ * <p>
+ * Users of the library may implement the interface themselves, or use the provided base implementation.
+ *
+ * @see BaseSubjectNode
+ */
+@PublicApi
 public interface SubjectNode {
 
     /**
@@ -14,6 +25,7 @@ public interface SubjectNode {
      * @param references A collection of named node references that can be used for matching
      * @return True iff the type and properties are either null or match the given node
      */
+    @PublicApi
     boolean matches(String type, Map<String, Object> properties, Map<String, SubjectNode> references);
 
     /**
@@ -22,6 +34,7 @@ public interface SubjectNode {
      *
      * @return A stream of nodes to match against
      */
+    @InternalApi
     Stream<? extends SubjectNode> getMatchingTargets();
 
     /**
@@ -29,6 +42,7 @@ public interface SubjectNode {
      *
      * @return The string identifying the type of this node
      */
+    @InternalApi
     String getType();
 
     /**
@@ -36,6 +50,7 @@ public interface SubjectNode {
      *
      * @return A (possibly empty) map of properties of this node
      */
+    @InternalApi
     Map<String, Object> getProperties();
 
     /**
@@ -43,5 +58,6 @@ public interface SubjectNode {
      *
      * @return A (possibly empty) list of children of this node
      */
+    @InternalApi
     List<? extends SubjectNode> getChildren();
 }

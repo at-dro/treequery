@@ -1,5 +1,6 @@
 package at.ac.tuwien.treequery.xml;
 
+import at.ac.tuwien.treequery.annotation.PublicApi;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
@@ -17,6 +18,7 @@ import java.io.OutputStream;
 /**
  * This class is a wrapper around an XML Node and provides some higher level creation access
  */
+@PublicApi
 public class XmlCreator {
 
     private final Document document;
@@ -28,6 +30,7 @@ public class XmlCreator {
      * @param root The tag name of the root element
      * @throws XmlException Thrown if the XML document could not be created
      */
+    @PublicApi
     public XmlCreator(String root) {
         try {
             document = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
@@ -51,6 +54,7 @@ public class XmlCreator {
      * @return An XmlCreator instance wrapping the new element
      * @throws XmlException Thrown if the XML document could not be created
      */
+    @PublicApi
     public static XmlCreator createElement(String name, XmlCreator parent) {
         return parent == null ? new XmlCreator(name) : parent.appendChild(name);
     }
@@ -61,6 +65,7 @@ public class XmlCreator {
      * @param name The tag name of the new child
      * @return The XmlCreator instance wrapping the new child element
      */
+    @PublicApi
     public XmlCreator appendChild(String name) {
         Element child = document.createElement(name);
         element.appendChild(child);
@@ -74,6 +79,7 @@ public class XmlCreator {
      * @param value The value for the attribute
      * @return This XmlCreator instance to allow chaining
      */
+    @PublicApi
     public XmlCreator setAttribute(String key, String value) {
         element.setAttribute(key, value);
         return this;
@@ -85,6 +91,7 @@ public class XmlCreator {
      * @param text The text to set
      * @return This XmlCreator instance to allow chaining
      */
+    @PublicApi
     public XmlCreator setText(String text) {
         element.appendChild(document.createCDATASection(text));
         return this;
@@ -96,6 +103,7 @@ public class XmlCreator {
      * @param out The output stream to use
      * @throws IOException Thrown if writing failed
      */
+    @PublicApi
     public void write(OutputStream out) throws IOException {
         // CAVE: There is a bug in OpenJDK<14 that causes additional whitespace to be added around text content
         // See: https://bugs.openjdk.java.net/browse/JDK-8223291

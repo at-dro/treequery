@@ -1,5 +1,6 @@
 package at.ac.tuwien.treequery.xml;
 
+import at.ac.tuwien.treequery.annotation.PublicApi;
 import at.ac.tuwien.treequery.subject.BaseSubjectNode;
 import at.ac.tuwien.treequery.subject.SubjectNode;
 
@@ -8,6 +9,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * This converter can be used to parse and write subject trees as XML
+ */
+@PublicApi
 public class SubjectXmlConverter extends XmlConverter<SubjectNode> {
 
     @Override
