@@ -45,3 +45,9 @@ jobs:
           cache: maven
       - name: Build with Maven
         run: mvn -B -Dmaven.test.skip package
+      - name: Upload created artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: jar-packages
+          path: target/*.jar
+          if-no-files-found: error
