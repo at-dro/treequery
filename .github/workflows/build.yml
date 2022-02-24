@@ -25,6 +25,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.jdk }}
+          distribution: zulu
           cache: maven
       - name: Test with Maven
         run: mvn -B test
