@@ -1,0 +1,35 @@
+name: Create a release
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    name: Create a release and add build artifacts
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          distribution: zulu
+          cache: maven
+      - name: Obtain version information
+        id: version
+        run: |
+          version=$(mvn -B help:evaluate -Dexpression=project.version -DforceStdout -q)
+          if [[ "$version" == *SNAPSHOT ]]; then snapshot="true"; else snapshot="false"; fi
+          echo "::set-output name=version::${version}"
+          echo "::set-output name=snapshot::${snapshot}"
+      - name: Build with Maven
+        run: mvn -B package
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          prerelease: ${{ steps.version.outputs.snapshot }}
+          draft: false
+          body_path: CHANGELOG.md
+          files: target/*.jar
