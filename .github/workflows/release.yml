@@ -1,11 +1,11 @@
-name: Create a release
+name: Create release
 
 on:
   workflow_dispatch:
 
 jobs:
   release:
-    name: Create a release and add build artifacts
+    name: Create release
     runs-on: ubuntu-latest
 
     steps:
