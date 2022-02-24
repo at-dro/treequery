@@ -1,0 +1,46 @@
+name: Run tests and package JAR artifacts with Maven
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/build.yml
+      - src/**
+      - pom.xml
+
+jobs:
+  test:
+    name: Run tests with JDK ${{ matrix.jdk }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        jdk: [11, 14, 16, 17]
+      fail-fast: false
+      max-parallel: 2
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{ matrix.jdk }}
+          cache: maven
+      - name: Test with Maven
+        run: mvn -B test
+
+  package:
+    name: Package JAR artifacts
+    runs-on: ubuntu-latest
+    needs:
+      - test
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: 17
+          cache: maven
+      - name: Build with Maven
+        run: mvn -B -Dmaven.test.skip package
