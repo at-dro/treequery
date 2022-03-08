@@ -50,7 +50,7 @@ class SubjectXmlConverterTest {
 
     private static SubjectNode buildSubjectValues() {
         return type("root")
-                .child(type("a").prop("p1", "va")
+                .child(type("a").prop("p1", "va").prop("value", "parent value")
                         .child(type("b").prop("p1", "vb").prop("value", "1234").build())
                         .child(type("c").prop("p1", "vc").prop("value", "    ").build())
                         .child(type("d").prop("p1", "vd").prop("value", "\n").build())

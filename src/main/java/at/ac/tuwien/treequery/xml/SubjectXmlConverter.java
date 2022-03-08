@@ -22,9 +22,7 @@ public class SubjectXmlConverter extends XmlConverter<SubjectNode> {
         Map<String, String> properties = node.getAttributes();
 
         // Add the value of text elements to the properties
-        if (children.isEmpty()) {
-            node.getValue().ifPresent(v -> properties.put("value", v));
-        }
+        node.getValue().ifPresent(v -> properties.put("value", v));
 
         return new BaseSubjectNode(node.getName(), Collections.unmodifiableMap(properties), children);
     }
