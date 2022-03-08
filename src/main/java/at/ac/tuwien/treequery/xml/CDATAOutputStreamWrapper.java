@@ -14,6 +14,7 @@ class CDATAOutputStreamWrapper extends OutputStream {
 
     private static final String CDATA_START = "<![CDATA[";
     private static final String CDATA_END = "]]>";
+    private static final String END_TAG = "</";
 
     private final OutputStream out;
 
@@ -81,6 +82,8 @@ class CDATAOutputStreamWrapper extends OutputStream {
                     if (tagIndex >= CDATA_END.length()) {
                         // CDATA end tag completed, move on to next state
                         state = 3;
+                        numSpace = 0;
+                        tagIndex = 0;
                     }
                 } else {
                     // Missing something in the end tag, start again
@@ -88,8 +91,29 @@ class CDATAOutputStreamWrapper extends OutputStream {
                 }
                 break;
             case 3:
-                // After CDATA, wait for non-whitespace character
-                if (c != ' ' && c != '\n') {
+                // After CDATA, but before end tag
+                if (c == END_TAG.charAt(tagIndex)) {
+                    // Found next character of end tag
+                    tagIndex++;
+                    if (tagIndex >= END_TAG.length()) {
+                        // end tag, print it and return to initial state
+                        for (int i = 0; i < END_TAG.length(); i++) {
+                            out.write(END_TAG.charAt(i));
+                        }
+                        state = 0;
+                    }
+                } else if (tagIndex == 0 && c == ' ') {
+                    // Still before end tag and adding another whitespace
+                    numSpace++;
+                } else if (tagIndex > 0 || c != '\n') {
+                    // Some other content: Output the missing whitespace and parts of end tag and reset to state 0
+                    out.write('\n');
+                    for (int i = 0; i < numSpace; i++) {
+                        out.write(' ');
+                    }
+                    for (int i = 0; i < tagIndex; i++) {
+                        out.write(END_TAG.charAt(i));
+                    }
                     out.write(c);
                     state = 0;
                 }
