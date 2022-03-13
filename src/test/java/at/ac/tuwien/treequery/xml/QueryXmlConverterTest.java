@@ -75,16 +75,31 @@ class QueryXmlConverterTest {
 
     @ParameterizedTest
     @MethodSource("cases")
-    void exportSubject(String expectedFile, QueryNode subject) throws Exception {
+    void exportQuery(String expectedFile, QueryNode query) throws Exception {
         // Create output stream
         ByteArrayOutputStream out = new ByteArrayOutputStream();
 
-        // Export subject to output stream
-        converter.export(subject, out);
+        // Export query to output stream
+        converter.export(query, out);
 
         try (InputStream expected = getQueryXml(expectedFile)) {
             // Compare to expected result
             assertArrayEquals(expected.readAllBytes(), out.toByteArray());
+        }
+    }
+
+    @ParameterizedTest
+    @MethodSource("cases")
+    void exportQueryNoIndent(String expectedFile, QueryNode query) throws Exception {
+        // Create output stream
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        // Export query to output stream
+        converter.export(query, out, false);
+
+        try (InputStream expected = getQueryXml(expectedFile)) {
+            // Compare to expected result
+            assertEquals(new String(expected.readAllBytes()).replaceAll("\n *(<|$)", "$1"), out.toString());
         }
     }
 

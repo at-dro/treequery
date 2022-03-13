@@ -105,17 +105,33 @@ public class XmlCreator {
      */
     @PublicApi
     public void write(OutputStream out) throws IOException {
-        // CAVE: There is a bug in OpenJDK<14 that causes additional whitespace to be added around text content
-        // See: https://bugs.openjdk.java.net/browse/JDK-8223291
-        // The wrapper removes this whitespace
-        out = CDATAOutputStreamWrapper.wrap(out);
+        write(out, true);
+    }
+
+    /**
+     * Write an XML string starting at this element to an output stream
+     *
+     * @param out The output stream to use
+     * @param indent Whether the resulting XML should be indented
+     * @throws IOException Thrown if writing failed
+     */
+    @PublicApi
+    public void write(OutputStream out, boolean indent) throws IOException {
+        if (indent) {
+            // CAVE: There is a bug in OpenJDK<14 that causes additional whitespace to be added around text content
+            // See: https://bugs.openjdk.java.net/browse/JDK-8223291
+            // The wrapper removes this whitespace
+            out = CDATAOutputStreamWrapper.wrap(out);
+        }
 
         try {
             Transformer transformer = TransformerFactory.newInstance().newTransformer();
 
             transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            if (indent) {
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            }
 
             transformer.transform(new DOMSource(document), new StreamResult(out));
 

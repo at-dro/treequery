@@ -88,6 +88,21 @@ class SubjectXmlConverterTest {
         }
     }
 
+    @ParameterizedTest
+    @MethodSource("cases")
+    void exportSubjectNoIndent(String expectedFile, SubjectNode subject) throws Exception {
+        // Create output stream
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+        // Export subject to output stream
+        converter.export(subject, out, false);
+
+        try (InputStream expected = getSubjectXml(expectedFile)) {
+            // Compare to expected result
+            assertEquals(new String(expected.readAllBytes()).replaceAll("\n *(<|$)", "$1"), out.toString());
+        }
+    }
+
     private InputStream getSubjectXml(String name) {
         InputStream in = getClass().getClassLoader().getResourceAsStream("xml/subject/" + name + ".xml");
         assertNotNull(in, "Subject XML resource " + name + " must not be null");

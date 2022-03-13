@@ -79,12 +79,25 @@ public abstract class XmlConverter<T> {
      * Writes a tree to the specified {@code OutputStream}
      *
      * @param node The root node of the tree to write
-     * @param out The stream where the XML string is written to
+     * @param out The stream where the formatted XML string is written to
      * @throws IOException Thrown if the data could not be written
      */
     @PublicApi
     public void export(T node, OutputStream out) throws IOException {
-        createXml(node, null).write(out);
+        export(node, out, true);
+    }
+
+    /**
+     * Writes a tree to the specified {@code OutputStream}
+     *
+     * @param node The root node of the tree to write
+     * @param out The stream where the XML string is written to
+     * @param indent Whether the resulting XML string should be indented
+     * @throws IOException Thrown if the data could not be written
+     */
+    @PublicApi
+    public void export(T node, OutputStream out, boolean indent) throws IOException {
+        createXml(node, null).write(out, indent);
     }
 
     /**
