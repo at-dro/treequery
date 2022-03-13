@@ -67,9 +67,7 @@ public class QueryXmlConverter extends XmlConverter<QueryNode> {
         }
 
         // Add the value of text elements to the properties
-        if (children.isEmpty()) {
-            node.getValue().ifPresent(v -> properties.put("value", v));
-        }
+        node.getValue().ifPresent(v -> properties.put("value", v));
 
         return new SingleQueryNode(node.getName(), Collections.unmodifiableMap(properties), childrenContainer, direct, reference);
     }
