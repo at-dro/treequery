@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<container>
+    <a direct="true" mode="exact">
+        <container>
+            <container mode="optional">
+                <non-existent/>
+            </container>
+            <b direct="true"/>
+            <d direct="true"/>
+        </container>
+        <f direct="true"/>
+    </a>
+</container>

@@ -43,11 +43,18 @@ public class AllQueryNode extends ContainerQueryNode {
             // Cache results, so they do not need to be loaded multiple times
             Map<MatchingState, StreamCache<MatchingState>> resultCache = new HashMap<>();
             states = states.flatMap(
-                    candidate -> ordered
-                            // Ordered case: Start looking from the start state, but then only keep those after the candidate state
-                            ? runCached(candidate.withStart(start), query, resultCache).filter(s -> s.isLaterThan(candidate))
+                    candidate -> {
+                        if (!ordered) {
                             // Unordered case: Start looking from the start state, but then put the later node in the result
-                            : runCached(candidate.withStart(start), query, resultCache).map(s -> s.withMaxElement(candidate))
+                            return runCached(candidate.withStart(start), query, resultCache).map(s -> s.withMaxElement(candidate));
+                        } else if (query instanceof ContainerQueryNode) {
+                            // Ordered case, but another container: This might return the candidate again, so the filter approach won't work
+                            return runCached(candidate, query, resultCache);
+                        } else {
+                            // Ordered case: Start looking from the start state, but then only keep those after the candidate state
+                            return runCached(candidate.withStart(start), query, resultCache).filter(s -> s.isLaterThan(candidate));
+                        }
+                    }
             ).distinct();
         }
         return states;

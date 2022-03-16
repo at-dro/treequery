@@ -17,6 +17,7 @@ class NestedMatchingTest extends XmlMatchingTest {
                 Arguments.of("subject_nested02", "nested/nested02b_pos", true),
                 Arguments.of("subject_nested02", "nested/nested02c_pos", true),
                 Arguments.of("subject_nested02", "nested/nested02d_pos", true),
+                Arguments.of("subject_nested02", "nested/nested02e_pos", true),
                 Arguments.of("subject_nested02", "nested/nested02a_neg", false),
                 Arguments.of("subject_nested02", "nested/nested02b_neg", false),
                 Arguments.of("subject_nested02", "nested/nested02c_neg", false),
