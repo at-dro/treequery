@@ -146,6 +146,24 @@ public class MatchingState {
         return this.element != element ? new MatchingState(references, root, element) : this;
     }
 
+    /**
+     * Determines if this state is later than the other one
+     *
+     * @param other The other state to compare to
+     * @return Whether this state is later according to the element's compareTo method
+     */
+    public boolean isLaterThan(MatchingState other) {
+        if (other.element == null) {
+            // Other state already reached the end: This state cannot be later
+            return false;
+        }
+        if (this.element == null) {
+            // This state reached the end: This state must be later
+            return true;
+        }
+        return this.element.compareTo(other.element) > 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

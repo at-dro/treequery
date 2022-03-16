@@ -3,9 +3,12 @@ package at.ac.tuwien.treequery.query;
 import at.ac.tuwien.treequery.annotation.InternalApi;
 import at.ac.tuwien.treequery.builder.QueryNodeBuilder;
 import at.ac.tuwien.treequery.matching.MatchingState;
+import at.ac.tuwien.treequery.matching.StreamCache;
 import at.ac.tuwien.treequery.xml.QueryXmlConverter;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 /**
@@ -37,22 +40,25 @@ public class AllQueryNode extends ContainerQueryNode {
     public Stream<MatchingState> findMatches(MatchingState start) {
         Stream<MatchingState> states = Stream.of(start);
         for (QueryNode query : children) {
-            states = states.flatMap(candidate -> handleCandidate(start, candidate, query)).distinct();
+            // Cache results, so they do not need to be loaded multiple times
+            Map<MatchingState, StreamCache<MatchingState>> resultCache = new HashMap<>();
+            states = states.flatMap(
+                    candidate -> ordered
+                            // Ordered case: Start looking from the start state, but then only keep those after the candidate state
+                            ? runCached(candidate.withStart(start), query, resultCache).filter(s -> s.isLaterThan(candidate))
+                            // Unordered case: Start looking from the start state, but then put the later node in the result
+                            : runCached(candidate.withStart(start), query, resultCache).map(s -> s.withMaxElement(candidate))
+            ).distinct();
         }
         return states;
     }
 
-    private Stream<MatchingState> handleCandidate(MatchingState start, MatchingState candidate, QueryNode query) {
-        // If we are not looking for an ordered solution start at the original start node, but with the candidates references set
-        MatchingState state = ordered ? candidate : candidate.withStart(start);
-        Stream<MatchingState> result = query.findMatches(state);
-
-        if (!ordered) {
-            // If we are not looking for an ordered solution just put the later node in the result
-            result = result.map(s -> s.withMaxElement(candidate));
+    private Stream<MatchingState> runCached(MatchingState state, QueryNode query, Map<MatchingState, StreamCache<MatchingState>> cache) {
+        if (!cache.containsKey(state)) {
+            // Not yet in cache: Build the result
+            cache.put(state, new StreamCache<>(query.findMatches(state)));
         }
-
-        return result;
+        return cache.get(state).get();
     }
 
     public boolean isOrdered() {

@@ -3,12 +3,10 @@ package at.ac.tuwien.treequery.query;
 import at.ac.tuwien.treequery.annotation.InternalApi;
 import at.ac.tuwien.treequery.builder.QueryNodeBuilder;
 import at.ac.tuwien.treequery.matching.MatchingState;
+import at.ac.tuwien.treequery.matching.StreamCache;
 import at.ac.tuwien.treequery.xml.QueryXmlConverter;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -43,22 +41,23 @@ public class AnyQueryNode extends ContainerQueryNode {
             return Stream.of(start);
         }
 
-        Set<MatchingState> states = new HashSet<>();
+        StreamCache<MatchingState> states = new StreamCache<>(Stream.empty());
 
         for (QueryNode query : children) {
             // Match against previous match and against original state
-            Set<MatchingState> subResult = Stream.concat(Stream.of(start), states.stream())
+            Stream<MatchingState> subResult = Stream.concat(Stream.of(start), states.get())
+                    // Always start looking at the start state (with potentially different references set)
+                    .map(state -> state.withStart(start))
                     // Make sure only distinct states are evaluated
                     .distinct()
                     // Evaluate candidate states
-                    .flatMap(query::findMatches)
-                    .collect(Collectors.toSet());
+                    .flatMap(query::findMatches);
 
-            // Add to set of existing solutions
-            states.addAll(subResult);
+            // Add new results to existing solutions
+            states = new StreamCache<>(Stream.concat(states.get(), subResult).distinct());
         }
 
-        return optional && states.isEmpty() ? Stream.of(start) : states.stream();
+        return optional && states.get().findAny().isEmpty() ? Stream.of(start) : states.get();
     }
 
     public boolean isOptional() {
