@@ -91,8 +91,8 @@ The following shapes are used:
 * Exponential tree: Each node has the same number of children on average, i.e. the number of nodes grows exponentially with the depth.
   Two different numbers of children are used (`3` and `6`).
 
-This produces high trees for rectangular and triangular type (around 1000 for the largest subjects)
-and flat trees for the exponential tree (around 10 for the largest subjects).
+This produces high trees for rectangular and triangular type (height around 1000 for the largest subjects)
+and flat trees for the exponential tree (height around 10 for the largest subjects).
 
 ### Query Structures
 
@@ -137,7 +137,7 @@ Using a script to aggregate the runtimes on different parameters of the subjects
 
   ![Plot of the average runtime by query type](figures/querytype_querysize_averagetime.svg)
 
-* Setting the `direct` flag seems to the runtime slightly on large instances, as can be seen in the following plot.
+* Setting the `direct` flag seems to improve the runtime slightly on large instances, as can be seen in the following plot.
   This comes as no surprise, as it reduces the search space immensely.
 
   ![Plot of the average runtime by direct flag set](figures/directset_querysize_averagetime.svg)
